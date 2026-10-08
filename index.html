@@ -1,1714 +1,568 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fatal Model — Vitória Dias</title>
-<!--
-  Template de layout mobile para estudo/demonstração.
-  Persona fictícia (Vitória Dias) — fotos ficam em branco por enquanto.
-  A localização é detectada automaticamente pela IP (funciona com VPN).
--->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Privacy — Vitória Dias</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --coral:#E25352;
-    --ink:#263238;
-    --muted:#5D7A89;
-    --line:#E2E9ED;
-    --chip:#EFF1F3;
-    --ph:#DFE4E7;
-    --green:#22A45F;
-    --star:#F5B301;
-    --phone-w:412px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    background:#1c1f22;
-    color:var(--ink);
-    font-family:'Montserrat',sans-serif;
-    font-size:14px;font-weight:400;line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-    display:flex;justify-content:center;
-  }
-  button{font-family:'Montserrat',sans-serif;cursor:pointer}
-  a{text-decoration:none;color:inherit}
+:root{
+  --bg:#F4EFE7;
+  --card:#FFFFFF;
+  --ink:#232B36;
+  --muted:#8A94A3;
+  --orange:#E9682B;
+  --grad:linear-gradient(90deg,#F9A870 0%,#E87551 100%);
+  --blue:#3D9DF6;
+  --lock:#7C8DA8;
+  --line:#ECE5DA;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:'Poppins',system-ui,sans-serif;
+  background:#26262A;
+  display:flex;justify-content:center;
+  color:var(--ink);
+}
+.phone{
+  width:100%;max-width:412px;min-height:100vh;
+  background:var(--bg);
+  position:relative;overflow-x:hidden;
+  box-shadow:0 0 60px rgba(0,0,0,.5);
+}
 
-  .phone{
-    width:100%;max-width:var(--phone-w);
-    min-height:100vh;background:#FAFBFB;
-    position:relative;
-    box-shadow:0 0 40px rgba(0,0,0,.55);
-    overflow-x:hidden;
-    padding-bottom:92px;
-  }
+/* ============ HEADER ============ */
+.pv-header{
+  position:sticky;top:0;z-index:50;
+  background:var(--bg);
+  height:54px;display:flex;align-items:center;justify-content:center;
+  padding:0 16px;
+}
+.pv-logo{font-weight:800;font-size:22px;letter-spacing:-.5px;display:flex;align-items:baseline;gap:2px}
+.pv-logo .dot{width:7px;height:7px;border-radius:2px;background:var(--orange);display:inline-block;transform:translateY(-1px)}
+.globe{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--ink);opacity:.9}
+.globe svg{display:block}
 
-  /* Placeholders (usados só onde ainda não há conteúdo) */
-  .ph{background:var(--ph);border-radius:6px;height:12px;display:block}
-  .ph.lg{height:18px}
-  .ph.sm{height:10px}
-  .photo-ph{background:#fff;border:1px solid var(--line);display:block}
+/* ============ CARDS ============ */
+.wrap{padding:6px 12px 40px;display:flex;flex-direction:column;gap:12px}
+.card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 2px 10px rgba(60,40,20,.05)}
 
-  /* ============ NAVBAR ============ */
-  .navbar{
-    background:#fff;border-bottom:1px solid var(--line);
-    position:sticky;top:0;z-index:50;
-  }
-  .nav-inner{
-    display:flex;align-items:center;
-    height:56px;padding:0 14px;position:relative;
-  }
-  .hamb{background:none;border:0;padding:6px;display:grid;place-items:center}
-  .logo-center{
-    position:absolute;left:50%;top:50%;
-    transform:translate(-50%,-50%);
-    display:flex;align-items:center;gap:7px;
-  }
-  .logo-center .wm{
-    font-weight:800;font-size:23px;letter-spacing:-.8px;
-    color:var(--ink);text-transform:lowercase;
-  }
-  .logo-center .wm span{color:var(--coral)}
-  .logo-center img{height:27px;width:auto;display:block}
-  .nav-right{margin-left:auto;display:flex;align-items:center;gap:14px}
-  .flag{font-size:19px;display:flex;align-items:center;gap:3px}
-  .flag .chev{font-size:10px;color:var(--ink)}
-  .bell-wrap{position:relative;padding:4px}
-  .badge{
-    position:absolute;top:-1px;right:-3px;
-    background:var(--coral);color:#fff;
-    font-size:9px;font-weight:700;
-    min-width:15px;height:15px;border-radius:999px;
-    display:grid;place-items:center;padding:0 3px;
-    border:1.5px solid #fff;
-  }
+/* ============ PERFIL ============ */
+.cover{height:168px;background:#E7DCCD;position:relative;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.p-info{padding:0 16px 16px;position:relative}
+.avatar{
+  width:92px;height:92px;border-radius:50%;border:4px solid #fff;
+  background:#E7DCCD;overflow:hidden;
+  margin-top:-46px;position:relative;z-index:2;
+}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.p-stats{
+  position:absolute;right:16px;top:10px;
+  display:flex;gap:14px;align-items:center;
+  color:var(--muted);font-size:13.5px;font-weight:500;
+}
+.p-stats span{display:flex;align-items:center;gap:5px}
+.p-stats svg{display:block}
+.p-name{
+  margin-top:10px;font-size:20px;font-weight:700;
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.p-name .gratis{font-weight:700}
+.p-name .verif{flex:none}
+.p-handle{color:var(--muted);font-size:14px;font-weight:400;margin-top:1px}
+.p-bio{font-size:14.5px;line-height:1.45;margin-top:10px;color:var(--ink)}
+.p-bio .more{color:var(--orange);font-weight:600;font-size:13.5px;cursor:pointer;display:inline-block;margin-top:4px}
+.p-bio .full{display:none}
+.p-bio.open .full{display:inline}
+.p-bio.open .part{display:none}
+.p-sub{font-size:15.5px;font-weight:700;margin:18px 0 10px}
+.btn-grad{
+  width:100%;height:50px;border:none;border-radius:26px;
+  background:var(--grad);color:#3A2415;font-family:inherit;
+  font-size:16.5px;font-weight:700;cursor:pointer;
+  transition:transform .15s ease, filter .2s ease;
+}
+.btn-grad:active{transform:scale(.97)}
+.btn-grad.ok{filter:saturate(.6) brightness(1.05)}
 
-  /* Drawer do menu */
-  .drawer{
-    display:none;background:#fff;
-    border-bottom:1px solid var(--line);
-    box-shadow:0 12px 20px rgba(0,0,0,.12);
-    padding:14px;
-  }
-  .drawer.open{display:block}
-  .drawer h5{
-    font-size:13px;font-weight:700;text-transform:uppercase;
-    letter-spacing:.6px;margin-bottom:9px;
-  }
-  .drawer .opt{
-    display:block;width:100%;text-align:center;
-    border:1px solid var(--line);border-radius:8px;
-    padding:11px;font-size:13px;font-weight:600;
-    background:#fff;color:var(--ink);margin-bottom:8px;
-  }
-  .drawer .opt.primary{
-    background:var(--coral);color:#fff;border-color:var(--coral);
-    text-transform:uppercase;
-  }
-  .drawer hr{border:0;border-top:1px solid var(--line);margin:12px 0}
+/* ============ CONTADORES ============ */
+.counts{display:flex;align-items:center;padding:16px 8px}
+.counts .c{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15.5px;font-weight:700}
+.counts .c.posts{color:var(--orange)}
+.counts .c.media{color:var(--ink)}
+.counts .c svg{display:block}
 
-  /* ============ CAPA ============ */
-  .cover{
-    position:relative;overflow:visible;
-    height:150px;background:#E4E8EA;
-    border-bottom:1px solid var(--line);
-  }
-  .cover .ph-photo{
-    position:absolute;inset:0;
-    background:#E4E8EA;overflow:hidden;
-  }
-  .cover-media{
-    position:absolute;inset:0;
-    width:100%;height:100%;object-fit:cover;
-  }
-  .cover-media[hidden]{display:none}
-  .cover-overlay{
-    position:absolute;top:12px;left:12px;right:12px;
-    display:flex;align-items:center;gap:8px;z-index:5;
-  }
-  .cov-btn{
-    width:40px;height:40px;border-radius:50%;
-    background:#fff;border:0;
-    display:grid;place-items:center;
-    box-shadow:0 2px 8px rgba(0,0,0,.18);
-    flex-shrink:0;
-  }
-  .boost-pill{
-    position:relative;
-    width:40px;height:40px;padding:0;
-    background:#fff;border:0;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--coral);cursor:pointer;
-    box-shadow:0 3px 10px rgba(0,0,0,.22);
-    animation:boostPulse 2.4s ease-in-out infinite;
-  }
-  .boost-pill svg{width:18px;height:18px}
-  .boost-pill::before{
-    content:"";position:absolute;inset:-2px;
-    border-radius:50%;border:2px solid rgba(226,83,82,.5);
-    animation:boostRing 2.4s ease-out infinite;
-    pointer-events:none;
-  }
-  @keyframes boostPulse{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.13)}
-  }
-  @keyframes boostRing{
-    0%{transform:scale(1);opacity:.9}
-    75%,100%{transform:scale(1.75);opacity:0}
-  }
-  .boost-bubble{
-    position:absolute;top:calc(100% + 10px);left:50%;
-    transform:translateX(-50%) translateY(-5px) scale(.85);
-    background:#fff;color:var(--coral);
-    font-size:11.5px;font-weight:700;
-    padding:6px 12px;border-radius:999px;
-    white-space:nowrap;
-    box-shadow:0 4px 14px rgba(0,0,0,.25);
-    opacity:0;pointer-events:none;
-    transition:opacity .35s ease, transform .35s ease;
-    z-index:6;
-  }
-  .boost-bubble::after{
-    content:"";position:absolute;top:-3px;left:50%;
-    transform:translateX(-50%) rotate(45deg);
-    width:8px;height:8px;background:#fff;border-radius:2px;
-  }
-  .boost-pill.mostra .boost-bubble{
-    opacity:1;transform:translateX(-50%) translateY(0) scale(1);
-  }
-  .cover-overlay .grow{flex:1}
-  .cover-tag{
-    position:absolute;bottom:8px;left:98px;
-    background:#fff;color:var(--ink);
-    font-size:13px;font-weight:500;
-    padding:7px 14px;border-radius:999px;
-    box-shadow:0 2px 8px rgba(0,0,0,.15);
-    height:32px;display:flex;align-items:center;
-    z-index:4;white-space:nowrap;
-  }
-  .cover .fm-mark{
-    position:absolute;right:10px;bottom:6px;
-    opacity:.85;display:flex;align-items:center;gap:4px;
-  }
-  .cover .fm-mark .wm{
-    font-weight:800;font-size:11px;letter-spacing:-.4px;
-    color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);
-    text-transform:lowercase;
-  }
+/* ============ POST ============ */
+.post-head{display:flex;align-items:center;gap:10px;padding:12px 14px}
+.post-head .pa{width:44px;height:44px;border-radius:50%;background:#E7DCCD;overflow:hidden;flex:none}
+.post-head .pa img{width:100%;height:100%;object-fit:cover;display:block}
+.post-head .pn{flex:1;min-width:0}
+.post-head .pn b{font-size:14.5px;font-weight:700;display:flex;align-items:center;gap:5px}
+.post-head .pn small{color:var(--muted);font-size:12.5px;font-weight:400}
+.dots{color:var(--ink);opacity:.75;cursor:pointer;padding:4px;flex:none}
 
-  /* ============ CABEÇA DO PERFIL ============ */
-  .profile-head{
-    display:flex;gap:14px;align-items:flex-start;
-    padding:6px 14px 14px;margin-top:-8px;position:relative;
-    background:#fff;
-    border-bottom:1px solid var(--line);
-  }
-  .avatar-wrap{position:relative;flex-shrink:0;margin-top:-46px}
-  .avatar{
-    width:92px;height:92px;border-radius:50%;
-    background:#E4E8EA;
-    border:3px solid var(--coral);
-    box-shadow:0 2px 8px rgba(0,0,0,.15);
-    overflow:hidden;
-  }
-  .avatar img{
-    width:100%;height:100%;object-fit:cover;display:block;
-    border-radius:50%;
-  }
-  .avatar img[hidden]{display:none}
-  .avatar-check{
-    position:absolute;right:2px;bottom:4px;
-    width:20px;height:20px;border-radius:50%;
-    background:#22C55E;border:2.5px solid #fff;
-    box-shadow:0 0 6px rgba(34,197,94,.7);
-    animation:onlinePulse 1.6s ease-in-out infinite;
-  }
-  @keyframes onlinePulse{
-    0%,100%{box-shadow:0 0 6px rgba(34,197,94,.7)}
-    50%{box-shadow:0 0 12px rgba(34,197,94,1)}
-  }
-  .profile-info{flex:1;min-width:0;padding-top:8px}
-  .profile-info .pname{
-    font-size:21px;font-weight:700;color:var(--ink);
-    line-height:1.2;margin-bottom:9px;
-  }
-  .meta-row{
-    display:flex;align-items:center;gap:7px;
-    color:var(--muted);font-size:13px;
-    margin-bottom:11px;flex-wrap:wrap;
-  }
-  .meta-row .dot{color:var(--muted);font-size:12px}
-  .verified-pill{
-    display:inline-flex;align-items:center;gap:6px;
-    background:#E7F6EC;color:#1E9E52;
-    font-size:13px;font-weight:600;
-    padding:7px 14px;border-radius:999px;
-    cursor:pointer;-webkit-tap-highlight-color:transparent;
-  }
+.locked{
+  position:relative;height:342px;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;cursor:pointer;overflow:hidden;
+}
+.locked .wm{position:absolute;left:50%;top:52%;transform:translate(-46%,-50%);width:560px;pointer-events:none}
+.locked .pad{position:relative;z-index:2}
+.locked .lstats{
+  position:relative;z-index:2;display:flex;gap:16px;
+  color:var(--lock);font-size:15px;font-weight:600;align-items:center;
+}
+.locked .lstats span{display:flex;gap:6px;align-items:center}
+.media-box{display:none;height:342px;background:#111;position:relative}
+.media-box img,.media-box video{width:100%;height:100%;object-fit:cover;display:block}
+.post.unlocked .locked{display:none}
+.post.unlocked .media-box{display:block}
 
-  /* ============ AVALIAÇÕES RECENTES ============ */
-  .recent{
-    margin:12px;background:#fff;
-    border:1px solid var(--line);border-radius:12px;
-    padding:13px;
-  }
-  .recent-head{
-    display:flex;align-items:center;justify-content:space-between;
-    margin-bottom:11px;gap:10px;
-  }
-  .recent-head h3{font-size:14px;font-weight:700}
-  .rating{display:flex;align-items:center;gap:6px;font-size:14px}
-  .rating .star{color:var(--star)}
-  .rating b{font-weight:700}
-  .rating .count{color:var(--coral);font-weight:600;font-size:13px}
-  .recent-list{
-    display:flex;gap:9px;overflow-x:auto;
-    padding-bottom:4px;margin-bottom:10px;
-    scrollbar-width:none;
-  }
-  .recent-list::-webkit-scrollbar{display:none}
-  .recent-item{
-    flex:0 0 auto;min-width:150px;max-width:185px;
-    background:#fff;border:1px solid var(--line);
-    border-radius:10px;padding:10px;
-  }
-  .recent-item .r-line{
-    display:flex;align-items:center;gap:6px;
-    margin-bottom:7px;font-size:12px;
-  }
-  .recent-item .r-line .star{color:var(--star);font-size:13px}
-  .recent-item .r-line b{font-weight:700}
-  .recent-item .r-line .when{color:var(--muted);font-weight:400}
-  .recent-item .r-txt{font-size:13px;font-weight:700;color:var(--ink)}
-  .link-coral{
-    color:var(--coral);font-weight:600;font-size:13px;
-    background:none;border:0;padding:0;
-  }
+.actions{display:flex;align-items:center;padding:12px 16px;gap:18px}
+.actions svg{display:block;cursor:pointer;color:var(--lock)}
+.actions .right{margin-left:auto}
+.heart.on{color:#F2545B}
+.heart.on svg{fill:#F2545B}
+.bm.on svg{fill:var(--ink);color:var(--ink)}
 
-  /* Telegram */
-  .telegram-row{display:flex;justify-content:center;margin:4px 0 14px}
-  .telegram{
-    display:inline-flex;align-items:center;gap:7px;
-    color:#40B3E0;font-size:14px;font-weight:600;
-  }
+/* ============ TOAST ============ */
+#toast{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);
+  background:#232B36;color:#fff;font-size:13.5px;font-weight:500;
+  padding:11px 20px;border-radius:22px;opacity:0;transition:.3s;z-index:200;
+  white-space:nowrap;pointer-events:none;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-  /* ============ VALORES / LOCALIZAÇÃO ============ */
-  .cards-row{display:flex;gap:9px;padding:0 12px;margin-bottom:14px}
-  .card{
-    background:#fff;border:1px solid var(--line);
-    border-radius:12px;padding:13px;flex:1;min-width:0;
-  }
-  .card-head{
-    display:flex;align-items:flex-start;justify-content:space-between;
-    gap:8px;margin-bottom:13px;
-  }
-  .card-title{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:700}
-  .card-title.coral{color:var(--coral)}
-  .card-title .sub-title{
-    display:block;font-size:12px;font-weight:500;color:var(--coral);
-  }
-  .icon-coral{
-    width:18px;height:18px;border-radius:50%;
-    background:var(--coral);flex-shrink:0;
-    display:grid;place-items:center;
-  }
-  .chev-coral{flex-shrink:0}
-  .val-label{font-size:12px;color:var(--muted);margin-bottom:3px}
-  .val-big{display:flex;align-items:baseline;gap:6px;margin-bottom:5px}
-  .val-big .amount{font-size:19px;font-weight:800;color:var(--ink)}
-  .val-big .per{font-size:12px;color:var(--muted)}
-  .val-note{font-size:12px;color:var(--muted)}
-  .loc-big{
-    font-size:18px;font-weight:800;color:var(--ink);
-    margin-bottom:7px;line-height:1.2;
-    min-height:22px;
-  }
-  .loc-sub{margin-bottom:5px;font-size:13px;color:var(--muted)}
-  .loc-soft{font-size:12px;color:var(--muted)}
-  .loc-loading{opacity:.45}
+/* ============ LIGHTBOX ============ */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:100;display:none;align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img,#lb video{max-width:100%;max-height:100%;object-fit:contain}
+#lb .close{position:absolute;top:14px;right:16px;color:#fff;font-size:30px;cursor:pointer;z-index:2;line-height:1}
+#lb .nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;cursor:pointer;user-select:none;padding:0 14px;z-index:2}
+#lb .prev{left:0}#lb .next{right:0}
+#lb .count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:#fff;font-size:14px;font-weight:600;background:rgba(0,0,0,.5);padding:5px 14px;border-radius:14px}
 
-  /* ============ ABAS ============ */
-  .tabs{
-    display:flex;background:#fff;
-    border-bottom:1px solid var(--line);
-    position:sticky;top:56px;z-index:40;
-  }
-  .tab{
-    flex:1;background:none;border:0;
-    padding:12px 4px 10px;
-    display:flex;flex-direction:column;align-items:center;gap:2px;
-    font-size:14px;font-weight:600;color:var(--ink);
-    border-bottom:3px solid transparent;
-    margin-bottom:-1px;
-  }
-  .tab .t-count{font-size:11px;font-weight:500;color:var(--muted)}
-  .tab.active{color:var(--coral);border-bottom-color:var(--coral)}
-  .tab.active .t-count{color:var(--coral)}
-
-  /* ============ SEÇÕES ============ */
-  .section{
-    background:#fff;padding:16px 14px;
-    border-bottom:1px solid var(--line);
-  }
-  .section-head{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:10px;margin-bottom:14px;
-  }
-  .section-head .left{display:flex;align-items:center;gap:9px}
-  .section-head h2{font-size:15px;font-weight:700}
-  .grid-gallery{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:7px;
-    margin-bottom:13px;
-  }
-  .grid-gallery .photo-ph{
-    aspect-ratio:3/4;border-radius:8px;
-    position:relative;overflow:hidden;
-    background:#E9ECEE;border-color:#E9ECEE;
-  }
-  .grid-gallery .photo-ph img,
-  .grid-gallery .photo-ph video{
-    position:absolute;inset:0;
-    width:100%;height:100%;object-fit:cover;display:block;
-  }
-  .grid-gallery .photo-ph img[hidden],
-  .grid-gallery .photo-ph video[hidden]{display:none}
-  .grid-gallery .photo-ph.video::after{
-    content:"";position:absolute;top:50%;left:50%;
-    width:0;height:0;border-style:solid;
-    border-width:8px 0 8px 14px;
-    border-color:transparent transparent transparent rgba(255,255,255,.92);
-    transform:translate(-40%,-50%);
-    filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));
-  }
-  .grid-gallery .photo-ph.spark::before{
-    content:"✦";position:absolute;top:5px;right:7px;
-    color:#fff;font-size:13px;
-    text-shadow:0 1px 3px rgba(0,0,0,.5);
-  }
-  .grid-gallery .photo-ph:has(img:not([hidden])),
-  .grid-gallery .photo-ph:has(video:not([hidden])){cursor:pointer}
-  /* ---------- Lightbox (visualizar mídia em tela cheia) ---------- */
-  .lightbox{
-    position:fixed;inset:0;z-index:200;
-    background:rgba(0,0,0,.95);
-    display:none;align-items:center;justify-content:center;
-  }
-  .lightbox.open{display:flex}
-  .lightbox .lb-media{
-    max-width:100%;max-height:100%;
-    object-fit:contain;display:block;
-  }
-  .lb-btn{
-    position:absolute;z-index:2;
-    width:42px;height:42px;border-radius:50%;
-    background:rgba(255,255,255,.14);border:0;
-    color:#fff;font-size:20px;line-height:1;
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;-webkit-tap-highlight-color:transparent;
-  }
-  .lb-close{top:14px;right:14px;font-size:17px}
-  .lb-prev{left:10px;top:50%;transform:translateY(-50%)}
-  .lb-next{right:10px;top:50%;transform:translateY(-50%)}
-  .lb-count{
-    position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
-    color:#fff;font-size:13px;font-weight:600;
-    background:rgba(255,255,255,.14);padding:5px 13px;border-radius:20px;
-  }
-  /* ---------- Modal "Documentos verificados" ---------- */
-  .verify-modal{
-    position:fixed;inset:0;z-index:210;
-    background:#fff;display:none;
-    overflow-y:auto;
-    padding:20px 18px 34px;
-    animation:vmUp .28s ease;
-  }
-  .verify-modal.open{display:block}
-  @keyframes vmUp{from{transform:translateY(100%)}to{transform:none}}
-  .vm-head{
-    position:relative;
-    padding-right:44px;padding-bottom:15px;
-    border-bottom:1px solid #ECEFF1;
-    margin-bottom:16px;
-  }
-  .vm-head h3{
-    font-size:18px;font-weight:600;line-height:1.38;
-    color:#1F2937;
-  }
-  .vm-head h3 .vm-green{color:#4CAF50}
-  .vm-close{
-    position:absolute;top:-4px;right:0;
-    width:34px;height:34px;border-radius:50%;
-    background:#F0F2F5;border:0;
-    color:#5D7A89;font-size:15px;
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;
-  }
-  .vm-sub{
-    display:flex;align-items:flex-start;gap:9px;
-    margin-bottom:6px;
-  }
-  .vm-sub svg{flex-shrink:0;margin-top:2px}
-  .vm-sub span{
-    font-size:15px;font-weight:700;line-height:1.4;
-    color:#1F2937;
-  }
-  .vm-row{
-    display:flex;align-items:center;gap:12px;
-    padding:15px 0;
-    border-bottom:1px solid #ECEFF1;
-  }
-  .vm-row:last-child{border-bottom:0}
-  .vm-row .vm-check{flex-shrink:0}
-  .vm-row .vm-txt{
-    flex:1;font-size:15px;line-height:1.42;color:#263238;
-  }
-  .vm-row .vm-chev{flex-shrink:0}
-  /* ---------- Tela "Valores" ---------- */
-  #valoresCard{cursor:pointer}
-  .prices-modal{
-    position:fixed;inset:0;z-index:210;
-    background:#fff;display:none;
-    overflow-y:auto;
-    animation:vmUp .28s ease;
-  }
-  .prices-modal.open{display:block}
-  .pr-head{
-    display:flex;align-items:center;gap:15px;
-    background:#F6F7F8;padding:17px 18px;
-    border-bottom:1px solid #E8EBED;
-  }
-  .pr-head .pr-back{
-    background:none;border:0;padding:0;cursor:pointer;
-    display:flex;align-items:center;color:#1F2937;
-  }
-  .pr-head h3{font-size:21px;font-weight:600;color:#1F2937}
-  .pr-list{padding:2px 18px 0}
-  .pr-row{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:17px 0;border-bottom:1px solid #ECEFF1;
-    font-size:15px;gap:12px;
-  }
-  .pr-row .lb{font-weight:700;color:#1F2937}
-  .pr-row .vl{font-weight:600;color:#1F2937}
-  .pr-row.off .lb,.pr-row.off .vl{
-    color:#A7B0B6;font-weight:500;font-style:italic;
-    text-decoration:line-through;
-  }
-  .pr-pay-label{font-size:13px;color:#7B8790;padding:20px 18px 4px}
-  .pr-pay-row{
-    display:flex;justify-content:flex-start;gap:58px;
-    padding:10px 30px 34px;
-  }
-  .pr-pay{display:flex;flex-direction:column;align-items:center;gap:8px}
-  .pr-pay span{
-    font-size:10px;font-weight:800;letter-spacing:.4px;color:#263238;
-  }
-  .btn-block{
-    width:100%;background:var(--coral);color:#fff;border:0;
-    border-radius:10px;padding:14px;
-    font-weight:700;font-size:15px;
-    display:flex;align-items:center;justify-content:center;gap:9px;
-  }
-  .btn-block .play-box{
-    width:20px;height:20px;border-radius:5px;
-    border:2px solid #fff;display:grid;place-items:center;
-    font-size:8px;
-  }
-  .compare-thumb{
-    width:100%;height:150px;border-radius:10px;
-    background:#E9ECEE;border:1px solid var(--line);
-    margin-top:4px;overflow:hidden;position:relative;
-  }
-  .compare-thumb img{
-    width:100%;height:100%;object-fit:cover;display:block;
-  }
-  .compare-thumb img[hidden]{display:none}
-  .info-i{
-    width:20px;height:20px;border-radius:50%;
-    border:1.5px solid var(--muted);color:var(--muted);
-    font-size:11px;font-weight:700;
-    display:grid;place-items:center;flex-shrink:0;
-  }
-  .sub{
-    font-size:13px;font-weight:600;color:var(--muted);
-    margin-bottom:11px;
-  }
-  .lines{display:flex;flex-direction:column;gap:10px}
-  .lines .w95{width:95%}
-  .lines .w85{width:85%}
-  .lines .w60{width:60%}
-  p.bio{font-size:13.5px;color:var(--ink);line-height:1.65}
-  p.bio+p.bio{margin-top:11px}
-  .badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
-  .badge-s{
-    display:flex;align-items:center;gap:6px;
-    background:var(--chip);border-radius:16px;
-    padding:7px 12px;font-size:11px;font-weight:600;color:var(--ink);
-  }
-  .badge-s .check{color:var(--coral);font-weight:700}
-
-  /* Botão 17+ e lista de serviços adultos */
-  .btn17{
-    display:inline-flex;align-items:center;gap:7px;
-    background:#fff;border:1.5px solid var(--ink);
-    color:var(--ink);border-radius:999px;
-    padding:8px 17px;font-size:13.5px;font-weight:700;
-    font-family:inherit;cursor:pointer;margin-top:14px;
-  }
-  .btn17 .arrow{transition:.2s;font-size:11px}
-  .btn17.aberto{background:var(--coral);border-color:var(--coral);color:#fff}
-  .btn17.aberto .arrow{transform:rotate(180deg)}
-  .svc-list{margin-top:14px;border-top:1px solid var(--line)}
-  .svc-item{padding:11px 0;border-bottom:1px solid var(--line)}
-  .svc-top{
-    display:flex;justify-content:space-between;align-items:center;
-    gap:10px;font-size:14.5px;font-weight:600;color:var(--ink);
-  }
-  .svc-top .chev{color:#78909C;flex-shrink:0;font-size:14px}
-  .svc-pills{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-  .pill{
-    border-radius:999px;padding:4px 14px;
-    font-size:12px;font-weight:600;background:#fff;
-    border:1.5px solid;
-  }
-  .pill-faco{color:var(--coral);border-color:var(--coral)}
-  .pill-recebo{color:var(--ink);border-color:var(--ink)}
-  .chip-row{display:flex;flex-wrap:wrap;gap:7px}
-  .chip{
-    border:1px solid var(--coral);color:var(--coral);
-    background:#fff;border-radius:16px;
-    padding:6px 13px;font-size:12px;font-weight:600;
-    min-height:28px;display:flex;align-items:center;justify-content:center;
-  }
-  .chip.more{border-color:var(--line);color:var(--muted);background:var(--chip)}
-  .sched-row{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:10px;background:#F4F6F7;border:1px solid var(--line);
-    border-radius:8px;padding:9px 11px;margin-bottom:9px;
-  }
-  .sched-row .day{font-size:12px;font-weight:600}
-  .sched-row .time{font-size:12px;font-weight:600;color:var(--coral)}
-  .sched-note{color:var(--muted);font-size:11px;font-style:italic;margin-top:4px}
-  .created{color:var(--muted);font-size:12px;margin-top:12px}
-
-  /* Premium */
-  .premium{
-    margin:12px 12px 0;border-radius:12px;
-    background:linear-gradient(135deg,rgba(226,83,82,.14),rgba(226,83,82,.05));
-    border:1px solid rgba(226,83,82,.35);
-    padding:15px 13px;
-  }
-  .premium h3{font-size:15px;font-weight:700;margin-bottom:9px}
-  .premium p{font-size:13px;color:var(--ink);line-height:1.55}
-  .premium .btns{display:flex;gap:9px;margin-top:13px}
-  .premium .btns button{
-    flex:1;border-radius:8px;padding:11px;
-    font-weight:600;font-size:13px;
-  }
-  .premium .btns .p1{background:var(--coral);color:#fff;border:0}
-  .premium .btns .p2{background:#fff;color:var(--coral);border:1.5px solid var(--coral)}
-
-  /* Avaliações */
-  .rev-head{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:10px;margin-bottom:13px;
-  }
-  .rev-head h2{font-size:15px;font-weight:700}
-  .btn-outline{
-    background:transparent;border:1px solid var(--coral);
-    color:var(--coral);border-radius:8px;
-    padding:7px 15px;font-weight:600;font-size:12px;
-  }
-  .rev-summary{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-  .rev-summary b{font-size:15px}
-  .rev-summary .count{color:var(--coral);font-weight:600;font-size:13px}
-  .review{
-    display:flex;gap:11px;padding:13px 0;
-    border-top:1px solid var(--line);
-  }
-  .review-avatar{
-    width:38px;height:38px;border-radius:50%;
-    background:#E9ECEE;border:1px solid var(--line);flex-shrink:0;
-    display:grid;place-items:center;
-    font-weight:700;color:var(--muted);font-size:14px;
-  }
-  .review-body{flex:1;min-width:0}
-  .review-top{
-    display:flex;justify-content:space-between;
-    align-items:center;gap:10px;margin-bottom:5px;
-  }
-  .review-top .who{font-size:13px;font-weight:700}
-  .review-top .when{font-size:11px;color:var(--muted)}
-  .stars{display:flex;gap:2px;margin-bottom:7px}
-  .stars span{color:var(--star);font-size:13px;line-height:1}
-  .review p{font-size:13px;color:var(--ink);line-height:1.55}
-
-  /* ============ RODAPÉ ============ */
-  footer{
-    background:#fff;border-top:1px solid var(--line);
-    padding:20px 14px;
-  }
-  .foot-center{display:flex;flex-direction:column;align-items:center;gap:9px;margin-bottom:16px}
-  .foot-logo{
-    display:flex;align-items:center;gap:7px;
-    font-weight:800;font-size:21px;letter-spacing:-.7px;
-    text-transform:lowercase;
-  }
-  .foot-logo span{color:var(--coral)}
-  .breadcrumbs{display:flex;flex-direction:column;gap:8px;align-items:center;margin-bottom:16px}
-  .breadcrumbs a{color:var(--muted);font-size:12px}
-  .foot-h4{font-size:13px;font-weight:700;margin-bottom:10px}
-  .foot-about{margin-bottom:16px}
-  .foot-about p{font-size:13px;color:var(--muted);line-height:1.6}
-  .foot-links{display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
-  .foot-links a{color:var(--muted);font-size:13px}
-  .social-row{display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
-  .social-row a{display:flex;align-items:center;gap:8px;color:#40B3E0;font-size:13px;font-weight:500}
-  .regions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-  .regions span,.regions a{
-    background:#F4F6F7;border:1px solid var(--line);
-    border-radius:14px;padding:6px 12px;
-    font-size:11px;font-weight:600;color:var(--muted);
-    text-decoration:none;display:inline-block;
-  }
-  .cnpj{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-  .cnpj .ph{width:190px}
-  .copyright{color:var(--muted);font-size:11px}
-
-  /* ============ BARRA FIXA ============ */
-  .bottom-bar{
-    position:fixed;bottom:0;left:50%;transform:translateX(-50%);
-    width:100%;max-width:var(--phone-w);
-    background:#fff;border-top:1px solid var(--line);
-    padding:9px 12px calc(9px + env(safe-area-inset-bottom));
-    display:flex;align-items:center;gap:12px;
-    z-index:60;
-  }
-  .price-block{flex-shrink:0;min-width:74px}
-  .price-block .from{font-size:11px;color:var(--muted);line-height:1.2}
-  .price-block .amount{
-    font-size:17px;font-weight:800;color:var(--ink);
-    text-decoration:underline;line-height:1.25;display:block;
-  }
-  .price-block .per{font-size:11px;color:var(--muted);line-height:1.2}
-  .btn-wpp{
-    flex:1;background:var(--green);color:#fff;border:0;
-    border-radius:10px;padding:14px 10px;
-    font-weight:700;font-size:14.5px;
-    display:flex;align-items:center;justify-content:center;gap:8px;
-  }
-
-  /* CTA intermediário */
-  .cta-mid{
-    margin:14px 12px 0;background:#fff;
-    border:1px solid var(--line);border-radius:12px;
-    padding:13px;text-align:center;
-  }
-  .cta-mid .line1{font-size:12px;color:var(--muted)}
-  .cta-mid .line2{font-size:16px;font-weight:800;margin:2px 0 11px}
-  .cta-mid .line2 small{font-weight:500;font-size:12px;color:var(--muted)}
+.end-note{text-align:center;color:var(--muted);font-size:13px;padding:10px 0 2px}
 </style>
 </head>
 <body>
-
 <div class="phone">
 
-  <!-- ============ NAVBAR ============ -->
-  <header class="navbar">
-    <div class="nav-inner">
-      <button class="hamb" id="menuBtn" aria-label="Menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M3 6.5h18M3 12h18M3 17.5h18" stroke="#263238" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-
-      <div class="logo-center">
-        <img src="logo.svg" alt="fatalmodel">
-      </div>
-
-      <nav class="nav-right">
-        <span class="flag">🇧🇷 <span class="chev">▼</span></span>
-        <span class="bell-wrap">
-          <svg width="23" height="23" viewBox="0 0 24 24" fill="none">
-            <path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.2 7-2.2 7h16.4S18 14.5 18 8.5z" stroke="#263238" stroke-width="1.7" stroke-linejoin="round"/>
-            <path d="M10.3 19a2 2 0 0 0 3.4 0" stroke="#263238" stroke-width="1.7" stroke-linecap="round"/>
-          </svg>
-          <span class="badge">5</span>
-        </span>
-      </nav>
-    </div>
-
-    <div class="drawer" id="drawer">
-      <h5>Cadastre-se grátis</h5>
-      <button class="opt primary">Quero ser cliente</button>
-      <button class="opt primary">Sou acompanhante</button>
-      <hr>
-      <h5>Login</h5>
-      <button class="opt">Entrar como cliente</button>
-      <button class="opt">Entrar como acompanhante</button>
-    </div>
+  <!-- ============ HEADER ============ -->
+  <header class="pv-header">
+    <div class="pv-logo">privacy<span class="dot"></span></div>
+    <span class="globe" onclick="toast('Português (BR)')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/>
+      </svg>
+    </span>
   </header>
 
-  <!-- ============ CAPA ============ -->
-  <div class="cover">
-    <div class="ph-photo"></div>
-    <img id="coverImg" class="cover-media" alt="" hidden>
-    <video id="coverVid" class="cover-media" muted loop playsinline autoplay hidden></video>
+  <div class="wrap">
 
-    <div class="cover-overlay">
-      <button class="cov-btn" aria-label="Voltar">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M19 12H5M10 7l-5 5 5 5" stroke="#263238" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <button class="boost-pill" aria-label="Impulsionar agora">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-          <path d="M5 19c1.5-4 5-9 11-12 1.5-.8 3-.9 3-.9s-.1 1.5-.9 3c-3 6-8 9.5-12 11l-1.1-1.1z" stroke="#E25352" stroke-width="1.7" stroke-linejoin="round"/>
-          <path d="M5 19l3.5-3.5M9 15l-2.5.5M9 15l-.5-2.5" stroke="#E25352" stroke-width="1.7" stroke-linecap="round"/>
-        </svg>
-        <span class="boost-bubble">Impulsionar agora</span>
-      </button>
-      <span class="grow"></span>
-      <button class="cov-btn" aria-label="Perfil">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <circle cx="10" cy="8" r="3.4" stroke="#263238" stroke-width="1.7"/>
-          <path d="M4 19c.8-3 3.2-4.6 6-4.6 1.2 0 2.3.3 3.2.9" stroke="#263238" stroke-width="1.7" stroke-linecap="round"/>
-          <path d="M17.5 14v6M14.5 17h6" stroke="#263238" stroke-width="1.7" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <button class="cov-btn" aria-label="Salvar">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
-          <path d="M6 4h12v17l-6-4.2L6 21V4z" stroke="#263238" stroke-width="1.7" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <button class="cov-btn" aria-label="Mais">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="5.5" r="1.6" fill="#263238"/>
-          <circle cx="12" cy="12" r="1.6" fill="#263238"/>
-          <circle cx="12" cy="18.5" r="1.6" fill="#263238"/>
-        </svg>
-      </button>
-    </div>
-
-    <span class="fm-mark">
-      <svg width="13" height="13" viewBox="0 0 32 32" fill="none">
-        <path d="M15.4 15.8C12.6 10.6 8.6 7.6 3.5 7c.5 5.4 4 9.6 9.2 11.4-4.6 2.4-7.6 6.4-8.4 11.4 5.2-.8 9.3-4.2 11.6-9.4z" fill="#fff"/>
-        <path d="M16.6 15.8C19.4 10.6 23.4 7.6 28.5 7c-.5 5.4-4 9.6-9.2 11.4 4.6 2.4 7.6 6.4 8.4 11.4-5.2-.8-9.3-4.2-11.6-9.4z" fill="#fff"/>
-      </svg>
-      <span class="wm">fatalmodel</span>
-    </span>
-  </div>
-
-  <!-- ============ CABEÇA ============ -->
-  <div class="profile-head">
-    <div class="avatar-wrap">
-      <div class="avatar"><img id="avatarImg" alt="" hidden></div>
-      <span class="avatar-check" title="Online"></span>
-    </div>
-
-    <div class="profile-info">
-      <div class="pname">Vitória Dias</div>
-      <div class="meta-row">
-        <span>Mulher</span>
-        <span class="info-i" style="width:15px;height:15px;font-size:9px">i</span>
-        <span class="dot">•</span>
-        <span>25 anos</span>
-        <span class="dot">•</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="9" r="4.5" stroke="#5D7A89" stroke-width="1.8"/>
-          <path d="M12 13.5V21M9 18h6" stroke="#5D7A89" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-        <span>482</span>
-      </div>
-      <span class="verified-pill">
-        <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M23,12 Q23.4,15.05 21.53,17.5 Q20.34,20.34 17.5,21.53 Q15.05,23.4 12,23 Q8.95,23.4 6.5,21.53 Q3.66,20.34 2.47,17.5 Q0.6,15.05 1,12 Q0.6,8.95 2.47,6.5 Q3.66,3.66 6.5,2.47 Q8.95,0.6 12,1 Q15.05,0.6 17.5,2.47 Q20.34,3.66 21.53,6.5 Q23.4,8.95 23,12 Z" fill="#0095F6"/>
-          <path d="M7.5 12.3l3.1 3.1 6.1-6.5" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
-        Documentos verificados
-        <span class="info-i" style="width:15px;height:15px;font-size:9px;border-color:#0095F6;color:#0095F6">i</span>
-      </span>
-    </div>
-  </div>
-
-  <!-- ============ AVALIAÇÕES RECENTES ============ -->
-  <section class="recent">
-    <div class="recent-head">
-      <h3>Avaliações recentes</h3>
-      <div class="rating">
-        <span class="star">★</span> <b>5.0</b> <span class="count">( 34 )</span>
-      </div>
-    </div>
-    <div class="recent-list">
-      <div class="recent-item">
-        <div class="r-line"><span class="star">★</span><b>5.0</b> <span class="when">há 1 semana</span></div>
-        <div class="r-txt">Simplesmente arretada, a cama quase quebra!</div>
-      </div>
-      <div class="recent-item">
-        <div class="r-line"><span class="star">★</span><b>5.0</b> <span class="when">há 1 mês</span></div>
-        <div class="r-txt">Combinou tudo e ainda me comeu melhor do que sonhei</div>
-      </div>
-      <div class="recent-item">
-        <div class="r-line"><span class="star">★</span><b>5.0</b> <span class="when">há 1 mês</span></div>
-        <div class="r-txt">O oral dela é ilegal de tão bom</div>
-      </div>
-      <div class="recent-item">
-        <div class="r-line"><span class="star">★</span><b>5.0</b> <span class="when">há 1 mês</span></div>
-        <div class="r-txt">Nem acreditei: 2x seguidas e ela pedindo mais</div>
-      </div>
-      <div class="recent-item">
-        <div class="r-line"><span class="star">★</span><b>5.0</b> <span class="when">há 2 meses</span></div>
-        <div class="r-txt">Pontual, safada e sem frescura — já voltei 3x</div>
-      </div>
-    </div>
-    <button class="link-coral">Ler avaliações</button>
-  </section>
-
-  <!-- ============ TELEGRAM ============ -->
-  <div class="telegram-row">
-    <a href="https://t.me/+fHLvAaGpX7Y1ODRh" target="_blank" rel="noopener" class="telegram">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="#40B3E0">
-        <path d="M21.5 3.5 2.8 10.8c-.9.4-.9 1.6 0 1.9l4.6 1.5 1.8 5.4c.3.8 1.3 1 1.9.4l2.6-2.5 4.6 3.4c.7.5 1.7.1 1.9-.7l3-14.6c.2-.9-.7-1.6-1.5-1.2zM8.7 13.7l9.4-5.8c.4-.3.9.3.5.6l-7.7 7-.3 3.2-1.9-5z"/>
-      </svg>
-      Novidades no Telegram
-    </a>
-  </div>
-
-  <!-- ============ VALORES / LOCALIZAÇÃO ============ -->
-  <div class="cards-row">
-    <section class="card" id="valoresCard">
-      <div class="card-head">
-        <div class="card-title">
-          <span class="icon-coral">
-            <svg width="9" height="9" viewBox="0 0 16 16" fill="none">
-              <path d="M8 3v10M5.5 5.5h5M5.5 10.5h5" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
-            </svg>
-          </span>
-          Valores
-        </div>
-        <svg class="chev-coral" width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M6 9l6 6 6-6" stroke="#E25352" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="val-label">a partir de</div>
-      <div class="val-big"><span class="amount">R$ 350</span><span class="per">(1 hora)</span></div>
-      <div class="val-note">atende homens</div>
-    </section>
-
+    <!-- ============ PERFIL ============ -->
     <section class="card">
-      <div class="card-head">
-        <div>
-          <div class="card-title coral">
-            <span class="icon-coral">
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
-                <path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z" stroke="#fff" stroke-width="2"/>
-                <circle cx="12" cy="10" r="2.4" fill="#fff"/>
-              </svg>
-            </span>
-            Localização
-          </div>
-          <span class="sub-title">( saiba mais )</span>
+      <div class="cover"><img id="imgBanner" alt="capa"></div>
+      <div class="p-info">
+        <div class="p-stats">
+          <span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>
+            299
+          </span>
+          <span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="14" height="12" rx="2.5"/><path d="M16.5 10.5l5-3v9l-5-3"/></svg>
+            328
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+            351
+          </span>
+          <span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg>
+            52.2K
+          </span>
         </div>
-        <svg class="chev-coral" width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M6 9l6 6 6-6" stroke="#E25352" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <div class="avatar"><img id="imgAvatar" alt="avatar"></div>
+        <div class="p-name">
+          Vitória Dias GRÁTIS
+          <svg class="verif" width="19" height="19" viewBox="0 0 24 24"><path fill="#3D9DF6" d="M12 1.8l2.5 2 3.2-.4 1 3 2.9 1.5-1 3 1 3-2.9 1.5-1 3-3.2-.4-2.5 2-2.5-2-3.2.4-1-3L2.4 15.4l1-3-1-3 2.9-1.5 1-3 3.2.4z"/><path fill="#fff" d="M10.6 15.4l-2.9-2.9 1.3-1.3 1.6 1.6 4-4 1.3 1.3z"/></svg>
+        </div>
+        <div class="p-handle">@VitoriaDiasfree</div>
+        <div class="p-bio" id="bio">
+          <span class="part">Talvez você já me conheça de algum lugar... 23 anos, gaúcha, DJ nas horas vagas e recém... </span><span class="full">...recém-chegada nesse mundo kkk. Tenho tudo lá nas postagens, é só ativar a assinatura gratuita aí em cima 💋</span><span class="more" onclick="document.getElementById('bio').classList.toggle('open');this.textContent=document.getElementById('bio').classList.contains('open')?'Mostrar menos':'Ler mais'">Ler mais</span>
+        </div>
+        <div class="p-sub">Assinaturas</div>
+        <button class="btn-grad" id="btnSub" onclick="assinar()">Gratuito</button>
       </div>
-      <div class="loc-big loc-loading" id="locCity">—</div>
-      <div class="loc-sub" id="locState">Detectando local...</div>
-      <div class="loc-soft">sem local</div>
     </section>
-  </div>
 
-  <!-- ============ CTA INTERMEDIÁRIO ============ -->
-  <div class="cta-mid">
-    <div class="line1">a partir de</div>
-    <div class="line2">R$ 350 <small>(1 hora)</small></div>
-    <a href="https://wa.me/5581995219661" target="_blank" rel="noopener" class="btn-wpp" style="width:100%">
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="#fff">
-        <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.8-2.9-1.2-4.7-4.2-4.8-4.4-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.7.7 1.8.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.4.7 1.6.8.2.1.4.2.4.3.1.1.1.6-.1 1.2z"/>
-      </svg>
-      Chamar no WhatsApp
-    </a>
-  </div>
-
-  <!-- ============ ABAS ============ -->
-  <div class="tabs" id="tabs" style="margin-top:14px">
-    <button class="tab active" data-target="galeria">
-      Fotos e vídeos <span class="t-count">(12)</span>
-    </button>
-    <button class="tab" data-target="sobre">
-      Sobre mim
-    </button>
-    <button class="tab" data-target="avaliacoes">
-      Avaliações <span class="t-count">(34)</span>
-    </button>
-  </div>
-
-  <!-- ============ GALERIA ============ -->
-  <section class="section" id="galeria">
-    <div class="section-head">
-      <div class="left">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="6" width="14" height="12" rx="2.5" stroke="#263238" stroke-width="1.7"/>
-          <path d="M17 10.5l4-2.5v8l-4-2.5" stroke="#263238" stroke-width="1.7" stroke-linejoin="round"/>
-          <path d="M6 3.5 7.5 6M14 3.5 12.5 6" stroke="#263238" stroke-width="1.7" stroke-linecap="round"/>
-        </svg>
-        <h2>Galeria de fotos e vídeos</h2>
-      </div>
-      <button aria-label="Compartilhar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M4 13c4-6 9-7 12-7M16 3l3.5 3L16 9" stroke="#263238" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6 11v8a2 2 0 0 0 2 2h9" stroke="#263238" stroke-width="1.7" stroke-linecap="round"/>
-        </svg>
-      </button>
-    </div>
-
-    <!-- fotos: slots automáticos — jogue os arquivos na pasta "fotos" -->
-    <div class="grid-gallery" id="gallery">
-      <div class="photo-ph spark" data-slot="1"></div>
-      <div class="photo-ph spark" data-slot="2"></div>
-      <div class="photo-ph video" data-slot="3"></div>
-      <div class="photo-ph video" data-slot="4"></div>
-      <div class="photo-ph video" data-slot="5"></div>
-      <div class="photo-ph video" data-slot="6"></div>
-      <div class="photo-ph video" data-slot="7"></div>
-      <div class="photo-ph video" data-slot="8"></div>
-      <div class="photo-ph video" data-slot="9"></div>
-      <div class="photo-ph video" data-slot="10"></div>
-      <div class="photo-ph video" data-slot="11"></div>
-      <div class="photo-ph video" data-slot="12"></div>
-    </div>
-
-    <button class="btn-block">
-      <span class="play-box">▶</span>
-      Ver 12 mídias
-    </button>
-  </section>
-
-  <!-- ============ MÍDIA DE COMPARAÇÃO ============ -->
-  <section class="section">
-    <div class="section-head" style="margin-bottom:8px">
-      <div class="left">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="6" width="14" height="12" rx="2.5" stroke="#263238" stroke-width="1.7"/>
-          <path d="M17 10.5l4-2.5v8l-4-2.5" stroke="#263238" stroke-width="1.7" stroke-linejoin="round"/>
-          <path d="M6 3.5 7.5 6M14 3.5 12.5 6" stroke="#263238" stroke-width="1.7" stroke-linecap="round"/>
-        </svg>
-        <h2>Mídia de comparação</h2>
-      </div>
-      <span class="info-i">i</span>
-    </div>
-    <div class="compare-thumb"><img id="compareImg" alt="" hidden></div>
-  </section>
-
-  <div class="report-row" style="display:flex;justify-content:center;padding:12px 0;background:#fff;border-bottom:1px solid var(--line)">
-    <button class="link-coral" style="color:var(--muted);font-weight:500;font-size:12px">Denunciar anonimamente este perfil</button>
-  </div>
-
-  <!-- ============ SOBRE MIM ============ -->
-  <section class="section" id="sobre">
-    <div class="section-head"><h2>Sobre Mim</h2></div>
-    <p class="sub">Descrição</p>
-    <p class="bio">Morena, cheirosa, elegante e muito educada</p>
-    <p class="bio">Atendimento com carinho, atenção e sem pressa, exclusivamente em motel, em ambiente discreto, confortável e reservado, sempre prezando pelo sigilo.</p>
-    <p class="bio">Gosto de criar conexão e proporcionar uma experiência especial, com respeito, higiene e muita dedicação. Dona de um oral inesquecível.</p>
-    <div class="badges">
-      <span class="badge-s"><span class="check">✓</span> Realizo fetiches</span>
-      <span class="badge-s"><span class="check">✓</span> Fotos reais</span>
-      <span class="badge-s"><span class="check">✓</span> Diversas formas de pagamento</span>
-      <span class="badge-s"><span class="check">✓</span> Total discrição e privacidade</span>
-    </div>
-    <p class="bio" style="margin-top:13px">Se procura atenção, privacidade e uma experiência inesquecível, me chama.</p>
-  </section>
-
-  <!-- ============ CARACTERÍSTICAS ============ -->
-  <section class="section">
-    <div class="section-head"><h2>Características físicas</h2></div>
-    <div class="chip-row">
-      <span class="chip">1,65 m</span>
-      <span class="chip">60 kg</span>
-      <span class="chip">Cabelos pretos</span>
-      <span class="chip">Olhos castanhos escuros</span>
-      <span class="chip">Sem silicone</span>
-      <span class="chip">Sem tatuagem</span>
-      <span class="chip more">(+ 11)</span>
-    </div>
-  </section>
-
-  <!-- ============ SERVIÇOS ============ -->
-  <section class="section">
-    <div class="section-head"><h2>Serviços Oferecidos</h2></div>
-    <div class="chip-row">
-      <span class="chip">Companhia para eventos</span>
-      <span class="chip">Jantar e passeios</span>
-      <span class="chip">Massagem relaxante</span>
-      <span class="chip">Beijo na boca</span>
-    </div>
-    <button class="btn17" id="btn17" type="button">17+ <span class="arrow">▾</span></button>
-    <div class="svc-list" id="list17" hidden></div>
-  </section>
-
-  <!-- ============ HORÁRIO ============ -->
-  <section class="section">
-    <div class="section-head"><h2>Horário de Expediente</h2></div>
-    <div class="sched-row"><span class="day">Segunda-feira</span><span class="time">09:00 - 01:00</span></div>
-    <div class="sched-row"><span class="day">Terça-feira</span><span class="time">09:00 - 01:00</span></div>
-    <div class="sched-row"><span class="day">Quarta-feira</span><span class="time">09:00 - 01:00</span></div>
-    <div class="sched-row"><span class="day">Quinta-feira</span><span class="time">09:00 - 01:00</span></div>
-    <p class="sched-note">Os horários podem variar; a disponibilidade não é garantida.</p>
-    <p class="created">Perfil criado em março de 2024</p>
-  </section>
-
-  <!-- ============ PREMIUM ============ -->
-  <section class="premium">
-    <h3>Experimente o Premium</h3>
-    <p>Aproveite 30 dias gratuitos e desbloqueie avaliações ilimitadas, mídias exclusivas e muito mais.</p>
-    <div class="btns">
-      <button class="p1">Criar conta</button>
-      <button class="p2">Já tenho cadastro</button>
-    </div>
-  </section>
-
-  <!-- ============ AVALIAÇÕES ============ -->
-  <section class="section" id="avaliacoes" style="margin-top:12px">
-    <div class="rev-head">
-      <h2>Avaliações</h2>
-      <button class="btn-outline">Avaliar</button>
-    </div>
-    <div class="rev-summary">
-      <span class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></span>
-      <b>5.0</b> <span class="count">( 34 )</span>
-    </div>
-
-    <div class="review">
-      <div class="review-avatar">R</div>
-      <div class="review-body">
-        <div class="review-top">
-          <span class="who">Rafael M.</span>
-          <span class="when">há 2 dias</span>
+    <!-- ============ CONTADORES ============ -->
+    <section class="card">
+      <div class="counts">
+        <div class="c posts">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
+          422 Postagens
         </div>
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p>Cheguei nervoso e saí de lá tremendo. Essa boca é feita por gente apaixonada — oral absurdo, quase desmaiei ali mesmo. 1 hora não basta, já marquei 2 da próxima.</p>
-      </div>
-    </div>
-
-    <div class="review">
-      <div class="review-avatar">C</div>
-      <div class="review-body">
-        <div class="review-top">
-          <span class="who">Carlos S.</span>
-          <span class="when">há 1 semana</span>
+        <div class="c media">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5" width="14" height="14" rx="2.5"/><path d="M18.5 8.5l3-1.8v10.6l-3-1.8"/><circle cx="8" cy="10" r="1.4"/><path d="M16.5 16l-4-4-7 7"/></svg>
+          627 Mídias
         </div>
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p>Ela sentou com tanta vontade que eu gritei. Gozei 3 vezes em 1 hora e ela ainda subiu de novo de boca escorregadia. Melhor que já tive, sem exagero nenhum.</p>
       </div>
-    </div>
+    </section>
 
-    <div class="review">
-      <div class="review-avatar">A</div>
-      <div class="review-body">
-        <div class="review-top">
-          <span class="who">André L.</span>
-          <span class="when">há 2 semanas</span>
+    <!-- ============ POSTS ============ -->
+    <section class="card post" id="post1">
+      <div class="post-head">
+        <div class="pa"><img class="pa-img" alt=""></div>
+        <div class="pn">
+          <b>Vitória Dias GRÁTIS
+            <svg width="15" height="15" viewBox="0 0 24 24"><path fill="#3D9DF6" d="M12 1.8l2.5 2 3.2-.4 1 3 2.9 1.5-1 3 1 3-2.9 1.5-1 3-3.2-.4-2.5 2-2.5-2-3.2.4-1-3L2.4 15.4l1-3-1-3 2.9-1.5 1-3 3.2.4z"/><path fill="#fff" d="M10.6 15.4l-2.9-2.9 1.3-1.3 1.6 1.6 4-4 1.3 1.3z"/></svg>
+          </b>
+          <small>@VitoriaDiasfree</small>
         </div>
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p>Combinou 1 hora e transamos quase 2 — ela não desmontou nem quando tocou o alarme. Safada de um jeito que não se inventa: gemendo alto e pedindo mais sem parar.</p>
+        <span class="dots" onclick="toast('Opções do post')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+        </span>
       </div>
-    </div>
-
-    <div class="review">
-      <div class="review-avatar">F</div>
-      <div class="review-body">
-        <div class="review-top">
-          <span class="who">Felipe R.</span>
-          <span class="when">há 3 semanas</span>
+      <div class="locked" onclick="unlock('post1','foto1')">
+        <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
+        <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
+        <div class="lstats">
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>299</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="14" height="12" rx="2.5"/><path d="M16.5 10.5l5-3v9l-5-3"/></svg>328</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg>52.2K</span>
         </div>
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p>Pedi de quatro contra a parede e ela obedeceu na hora, me olhando pelo ombro. O vizinho bateu na parede e ela só acelerou. Foda-se haha.</p>
       </div>
-    </div>
+      <div class="media-box" data-slot="foto1"></div>
+      <div class="actions">
+        <span class="heart" onclick="curtir(this)"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg></span>
+        <span onclick="toast('Comentários somente para assinantes')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5c0 4.4-4 8-9 8-1.1 0-2.2-.2-3.1-.5L4 20.5l1.6-4C4.6 15.3 4 13.5 4 11.5c0-4.4 4-8 9-8s8 3.6 8 8z"/></svg></span>
+        <span onclick="toast('Chama no direct 😉')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2c-.5-.9-1.4-1.4-2.6-1.4-1.6 0-2.6.8-2.6 1.9 0 2.6 5.4 1.4 5.4 4.2 0 1.2-1.1 2-2.8 2-1.3 0-2.3-.5-2.8-1.5M12 6.2v11.6"/></svg></span>
+        <span class="bm right" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Salvo nos favoritos':'Removido dos favoritos')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3.5h12v17l-6-4.5-6 4.5v-17z"/></svg></span>
+      </div>
+    </section>
 
-    <div class="review">
-      <div class="review-avatar">T</div>
-      <div class="review-body">
-        <div class="review-top">
-          <span class="who">Thiago A.</span>
-          <span class="when">há 1 mês</span>
+    <section class="card post" id="post2">
+      <div class="post-head">
+        <div class="pa"><img class="pa-img" alt=""></div>
+        <div class="pn">
+          <b>Vitória Dias GRÁTIS
+            <svg width="15" height="15" viewBox="0 0 24 24"><path fill="#3D9DF6" d="M12 1.8l2.5 2 3.2-.4 1 3 2.9 1.5-1 3 1 3-2.9 1.5-1 3-3.2-.4-2.5 2-2.5-2-3.2.4-1-3L2.4 15.4l1-3-1-3 2.9-1.5 1-3 3.2.4z"/><path fill="#fff" d="M10.6 15.4l-2.9-2.9 1.3-1.3 1.6 1.6 4-4 1.3 1.3z"/></svg>
+          </b>
+          <small>@VitoriaDiasfree</small>
         </div>
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p>O oral é simplesmente divino: engola tudo sem pressa, com sede, olhando nos olhos. Terminei agarrado nela sem querer sair do quarto. Dinheiro bem gasto.</p>
+        <span class="dots" onclick="toast('Opções do post')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+        </span>
       </div>
-    </div>
-
-    <div class="review">
-      <div class="review-avatar">G</div>
-      <div class="review-body">
-        <div class="review-top">
-          <span class="who">Gustavo P.</span>
-          <span class="when">há 1 mês</span>
+      <div class="locked" onclick="unlock('post2','foto2')">
+        <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
+        <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
+        <div class="lstats">
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>299</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="14" height="12" rx="2.5"/><path d="M16.5 10.5l5-3v9l-5-3"/></svg>328</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg>52.2K</span>
         </div>
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p>A cama rangeu, o vizinho reclamou e ela só acelerou. Gozei na boca dela e ela riu, limpou e já me chamou de novo. Fotos reais — o vídeo de comparação não mente.</p>
       </div>
-    </div>
+      <div class="media-box" data-slot="foto2"></div>
+      <div class="actions">
+        <span class="heart" onclick="curtir(this)"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg></span>
+        <span onclick="toast('Comentários somente para assinantes')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5c0 4.4-4 8-9 8-1.1 0-2.2-.2-3.1-.5L4 20.5l1.6-4C4.6 15.3 4 13.5 4 11.5c0-4.4 4-8 9-8s8 3.6 8 8z"/></svg></span>
+        <span onclick="toast('Chama no direct 😉')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2c-.5-.9-1.4-1.4-2.6-1.4-1.6 0-2.6.8-2.6 1.9 0 2.6 5.4 1.4 5.4 4.2 0 1.2-1.1 2-2.8 2-1.3 0-2.3-.5-2.8-1.5M12 6.2v11.6"/></svg></span>
+        <span class="bm right" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Salvo nos favoritos':'Removido dos favoritos')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3.5h12v17l-6-4.5-6 4.5v-17z"/></svg></span>
+      </div>
+    </section>
 
-    <div class="review">
-      <div class="review-avatar">B</div>
-      <div class="review-body">
-        <div class="review-top">
-          <span class="who">Bruno C.</span>
-          <span class="when">há 2 meses</span>
+    <section class="card post" id="post3">
+      <div class="post-head">
+        <div class="pa"><img class="pa-img" alt=""></div>
+        <div class="pn">
+          <b>Vitória Dias GRÁTIS
+            <svg width="15" height="15" viewBox="0 0 24 24"><path fill="#3D9DF6" d="M12 1.8l2.5 2 3.2-.4 1 3 2.9 1.5-1 3 1 3-2.9 1.5-1 3-3.2-.4-2.5 2-2.5-2-3.2.4-1-3L2.4 15.4l1-3-1-3 2.9-1.5 1-3 3.2.4z"/><path fill="#fff" d="M10.6 15.4l-2.9-2.9 1.3-1.3 1.6 1.6 4-4 1.3 1.3z"/></svg>
+          </b>
+          <small>@VitoriaDiasfree</small>
         </div>
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p>Saí de lá com as pernas tremendo. Pedi de quatro, em pé, contra a parede — aceitou TUDO sem reclamar nenhuma vez. Safadeza com carinho, nota mil!</p>
+        <span class="dots" onclick="toast('Opções do post')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+        </span>
       </div>
-    </div>
-
-    <div class="review">
-      <div class="review-avatar">M</div>
-      <div class="review-body">
-        <div class="review-top">
-          <span class="who">Marcos V.</span>
-          <span class="when">há 2 meses</span>
+      <div class="locked" onclick="unlock('post3','foto3')">
+        <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
+        <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
+        <div class="lstats">
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>299</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="14" height="12" rx="2.5"/><path d="M16.5 10.5l5-3v9l-5-3"/></svg>328</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg>52.2K</span>
         </div>
-        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p>2 da manhã no WhatsApp, ela respondeu e me atendeu na mesma hora. Transou como se estivesse morrendo de vontade de mim. Nota 1000 não basta, pagaria o dobro.</p>
       </div>
-    </div>
-  </section>
+      <div class="media-box" data-slot="foto3"></div>
+      <div class="actions">
+        <span class="heart" onclick="curtir(this)"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg></span>
+        <span onclick="toast('Comentários somente para assinantes')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5c0 4.4-4 8-9 8-1.1 0-2.2-.2-3.1-.5L4 20.5l1.6-4C4.6 15.3 4 13.5 4 11.5c0-4.4 4-8 9-8s8 3.6 8 8z"/></svg></span>
+        <span onclick="toast('Chama no direct 😉')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2c-.5-.9-1.4-1.4-2.6-1.4-1.6 0-2.6.8-2.6 1.9 0 2.6 5.4 1.4 5.4 4.2 0 1.2-1.1 2-2.8 2-1.3 0-2.3-.5-2.8-1.5M12 6.2v11.6"/></svg></span>
+        <span class="bm right" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Salvo nos favoritos':'Removido dos favoritos')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3.5h12v17l-6-4.5-6 4.5v-17z"/></svg></span>
+      </div>
+    </section>
 
-  <!-- ============ RODAPÉ ============ -->
-  <footer>
-    <div class="foot-center">
-      <span class="foot-logo">
-        <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
-          <path d="M15.4 15.8C12.6 10.6 8.6 7.6 3.5 7c.5 5.4 4 9.6 9.2 11.4-4.6 2.4-7.6 6.4-8.4 11.4 5.2-.8 9.3-4.2 11.6-9.4z" fill="#E25352"/>
-          <path d="M16.6 15.8C19.4 10.6 23.4 7.6 28.5 7c-.5 5.4-4 9.6-9.2 11.4 4.6 2.4 7.6 6.4 8.4 11.4-5.2-.8-9.3-4.2-11.6-9.4z" fill="#E25352"/>
-        </svg>
-        fatal<span>model</span>
-      </span>
-    </div>
+    <section class="card post" id="post4">
+      <div class="post-head">
+        <div class="pa"><img class="pa-img" alt=""></div>
+        <div class="pn">
+          <b>Vitória Dias GRÁTIS
+            <svg width="15" height="15" viewBox="0 0 24 24"><path fill="#3D9DF6" d="M12 1.8l2.5 2 3.2-.4 1 3 2.9 1.5-1 3 1 3-2.9 1.5-1 3-3.2-.4-2.5 2-2.5-2-3.2.4-1-3L2.4 15.4l1-3-1-3 2.9-1.5 1-3 3.2.4z"/><path fill="#fff" d="M10.6 15.4l-2.9-2.9 1.3-1.3 1.6 1.6 4-4 1.3 1.3z"/></svg>
+          </b>
+          <small>@VitoriaDiasfree</small>
+        </div>
+        <span class="dots" onclick="toast('Opções do post')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+        </span>
+      </div>
+      <div class="locked" onclick="unlock('post4','foto4')">
+        <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
+        <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
+        <div class="lstats">
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>299</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="14" height="12" rx="2.5"/><path d="M16.5 10.5l5-3v9l-5-3"/></svg>328</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg>52.2K</span>
+        </div>
+      </div>
+      <div class="media-box" data-slot="foto4"></div>
+      <div class="actions">
+        <span class="heart" onclick="curtir(this)"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg></span>
+        <span onclick="toast('Comentários somente para assinantes')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5c0 4.4-4 8-9 8-1.1 0-2.2-.2-3.1-.5L4 20.5l1.6-4C4.6 15.3 4 13.5 4 11.5c0-4.4 4-8 9-8s8 3.6 8 8z"/></svg></span>
+        <span onclick="toast('Chama no direct 😉')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2c-.5-.9-1.4-1.4-2.6-1.4-1.6 0-2.6.8-2.6 1.9 0 2.6 5.4 1.4 5.4 4.2 0 1.2-1.1 2-2.8 2-1.3 0-2.3-.5-2.8-1.5M12 6.2v11.6"/></svg></span>
+        <span class="bm right" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Salvo nos favoritos':'Removido dos favoritos')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3.5h12v17l-6-4.5-6 4.5v-17z"/></svg></span>
+      </div>
+    </section>
 
-    <div class="breadcrumbs">
-      <a id="crumbState">Acompanhantes</a>
-      <a id="crumbCity">Mulheres na sua região</a>
-      <a>Avaliar acompanhante</a>
-    </div>
+    <section class="card post" id="post5">
+      <div class="post-head">
+        <div class="pa"><img class="pa-img" alt=""></div>
+        <div class="pn">
+          <b>Vitória Dias GRÁTIS
+            <svg width="15" height="15" viewBox="0 0 24 24"><path fill="#3D9DF6" d="M12 1.8l2.5 2 3.2-.4 1 3 2.9 1.5-1 3 1 3-2.9 1.5-1 3-3.2-.4-2.5 2-2.5-2-3.2.4-1-3L2.4 15.4l1-3-1-3 2.9-1.5 1-3 3.2.4z"/><path fill="#fff" d="M10.6 15.4l-2.9-2.9 1.3-1.3 1.6 1.6 4-4 1.3 1.3z"/></svg>
+          </b>
+          <small>@VitoriaDiasfree</small>
+        </div>
+        <span class="dots" onclick="toast('Opções do post')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+        </span>
+      </div>
+      <div class="locked" onclick="unlock('post5','foto5')">
+        <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
+        <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
+        <div class="lstats">
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>299</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="14" height="12" rx="2.5"/><path d="M16.5 10.5l5-3v9l-5-3"/></svg>328</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg>52.2K</span>
+        </div>
+      </div>
+      <div class="media-box" data-slot="foto5"></div>
+      <div class="actions">
+        <span class="heart" onclick="curtir(this)"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg></span>
+        <span onclick="toast('Comentários somente para assinantes')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5c0 4.4-4 8-9 8-1.1 0-2.2-.2-3.1-.5L4 20.5l1.6-4C4.6 15.3 4 13.5 4 11.5c0-4.4 4-8 9-8s8 3.6 8 8z"/></svg></span>
+        <span onclick="toast('Chama no direct 😉')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2c-.5-.9-1.4-1.4-2.6-1.4-1.6 0-2.6.8-2.6 1.9 0 2.6 5.4 1.4 5.4 4.2 0 1.2-1.1 2-2.8 2-1.3 0-2.3-.5-2.8-1.5M12 6.2v11.6"/></svg></span>
+        <span class="bm right" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Salvo nos favoritos':'Removido dos favoritos')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3.5h12v17l-6-4.5-6 4.5v-17z"/></svg></span>
+      </div>
+    </section>
 
-    <div class="foot-about">
-      <h4 class="foot-h4">Sobre a Fatal Model</h4>
-      <p>Conectando pessoas de forma segura e discreta, com tecnologia, transparência e muito respeito. Sua privacidade é a nossa prioridade.</p>
-    </div>
+    <section class="card post" id="post6">
+      <div class="post-head">
+        <div class="pa"><img class="pa-img" alt=""></div>
+        <div class="pn">
+          <b>Vitória Dias GRÁTIS
+            <svg width="15" height="15" viewBox="0 0 24 24"><path fill="#3D9DF6" d="M12 1.8l2.5 2 3.2-.4 1 3 2.9 1.5-1 3 1 3-2.9 1.5-1 3-3.2-.4-2.5 2-2.5-2-3.2.4-1-3L2.4 15.4l1-3-1-3 2.9-1.5 1-3 3.2.4z"/><path fill="#fff" d="M10.6 15.4l-2.9-2.9 1.3-1.3 1.6 1.6 4-4 1.3 1.3z"/></svg>
+          </b>
+          <small>@VitoriaDiasfree</small>
+        </div>
+        <span class="dots" onclick="toast('Opções do post')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+        </span>
+      </div>
+      <div class="locked" onclick="unlock('post6','foto6')">
+        <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
+        <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
+        <div class="lstats">
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>299</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="14" height="12" rx="2.5"/><path d="M16.5 10.5l5-3v9l-5-3"/></svg>328</span>
+          <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg>52.2K</span>
+        </div>
+      </div>
+      <div class="media-box" data-slot="foto6"></div>
+      <div class="actions">
+        <span class="heart" onclick="curtir(this)"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg></span>
+        <span onclick="toast('Comentários somente para assinantes')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5c0 4.4-4 8-9 8-1.1 0-2.2-.2-3.1-.5L4 20.5l1.6-4C4.6 15.3 4 13.5 4 11.5c0-4.4 4-8 9-8s8 3.6 8 8z"/></svg></span>
+        <span onclick="toast('Chama no direct 😉')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2c-.5-.9-1.4-1.4-2.6-1.4-1.6 0-2.6.8-2.6 1.9 0 2.6 5.4 1.4 5.4 4.2 0 1.2-1.1 2-2.8 2-1.3 0-2.3-.5-2.8-1.5M12 6.2v11.6"/></svg></span>
+        <span class="bm right" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Salvo nos favoritos':'Removido dos favoritos')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3.5h12v17l-6-4.5-6 4.5v-17z"/></svg></span>
+      </div>
+    </section>
 
-    <div class="social-row">
-      <a href="https://open.spotify.com/user/e3bw4nam8rfvb8e0wa4w8qq3f?si=890a3a612db944e6" target="_blank" rel="noopener"><span style="width:15px;height:15px;border-radius:50%;background:#40B3E0;display:inline-block"></span> Fatal Model no Spotify</a>
-      <a href="https://open.spotify.com/show/5svuSmKRcanDd2dMwj8HiB?si=638368b7ae794846" target="_blank" rel="noopener"><span style="width:15px;height:15px;border-radius:4px;background:#40B3E0;display:inline-block"></span> Podcast Acompanhadas</a>
-      <a href="https://fatalmodelgroup.com/" target="_blank" rel="noopener"><span style="width:15px;height:15px;border-radius:50%;background:#40B3E0;display:inline-block"></span> Grupo Fatal Model</a>
-      <a href="https://fatalfans.com/" target="_blank" rel="noopener"><span style="width:15px;height:15px;border-radius:4px;background:#40B3E0;display:inline-block"></span> Ver FatalFans</a>
-    </div>
-
-    <h4 class="foot-h4">Boas-vindas</h4>
-    <div class="foot-links">
-      <a href="https://fatalmodel.com/blog/" target="_blank" rel="noopener">Fatal Blog</a>
-      <a href="https://fatalmodel.com/contact" target="_blank" rel="noopener">Fale Conosco</a>
-      <a href="https://centraldeajuda.fatalmodel.com/pt-BR/" target="_blank" rel="noopener">Perguntas Frequentes</a>
-      <a href="https://fatalmodel.com/terms" target="_blank" rel="noopener">Termos de Uso</a>
-      <a href="https://fatalmodel.com/mapa-do-site" target="_blank" rel="noopener">Mapa do Site</a>
-      <a href="https://fatalmodel.com/privacy-policy" target="_blank" rel="noopener">Política de Privacidade</a>
-      <a href="tel:100">Denunciar</a>
-    </div>
-
-    <h4 class="foot-h4">Acompanhante</h4>
-    <div class="foot-links">
-      <a href="https://fatalmodel.com/quanto-ganha-uma-acompanhante" target="_blank" rel="noopener">Calculadora de ganhos</a>
-      <a href="https://fatalmodel.com/rotina-de-acompanhante" target="_blank" rel="noopener">Como é ser uma acompanhante</a>
-      <a href="https://fatalmodel.com/planos" target="_blank" rel="noopener">Planos para Anunciantes</a>
-      <a href="https://fatalmodel.com/consumer/plans" target="_blank" rel="noopener">Planos para Clientes</a>
-    </div>
-
-    <div class="regions">
-      <a href="https://fatalmodel.com/acompanhantes-norte" target="_blank" rel="noopener">Norte</a>
-      <a href="https://fatalmodel.com/acompanhantes-nordeste" target="_blank" rel="noopener">Nordeste</a>
-      <a href="https://fatalmodel.com/acompanhantes-sudeste" target="_blank" rel="noopener">Sudeste</a>
-      <a href="https://fatalmodel.com/acompanhantes-sul" target="_blank" rel="noopener">Sul</a>
-      <a href="https://fatalmodel.com/acompanhantes-centro-oeste" target="_blank" rel="noopener">Centro-Oeste</a>
-    </div>
-
-    <div class="cnpj"><span class="ph"></span></div>
-    <p class="copyright">Copyright 2026 © Fatal Model.</p>
-  </footer>
-
-  <!-- ============ BARRA FIXA ============ -->
-  <div class="bottom-bar">
-    <div class="price-block">
-      <span class="from">a partir de</span>
-      <span class="amount">R$ 350</span>
-      <span class="per">(1 hora)</span>
-    </div>
-    <a href="https://wa.me/5581995219661" target="_blank" rel="noopener" class="btn-wpp">
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="#fff">
-        <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.8-2.9-1.2-4.7-4.2-4.8-4.4-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.7.7 1.8.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.4.7 1.6.8.2.1.4.2.4.3.1.1.1.6-.1 1.2z"/>
-      </svg>
-      Chamar no WhatsApp
-    </a>
+    <div class="end-note">Você viu tudo por aqui ✨</div>
   </div>
 
-</div>
-
-<!-- ============ LIGHTBOX ============ -->
-<div class="lightbox" id="lightbox">
-  <button class="lb-btn lb-close" id="lbClose" aria-label="Fechar">✕</button>
-  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Anterior">‹</button>
-  <button class="lb-btn lb-next" id="lbNext" aria-label="Próxima">›</button>
-  <div class="lb-count" id="lbCount"></div>
-</div>
-
-<!-- ============ MODAL: DOCUMENTOS VERIFICADOS ============ -->
-<div class="verify-modal" id="verifyModal">
-  <div class="vm-head">
-    <h3>Entenda o que torna esse perfil <span class="vm-green">verificado:</span></h3>
-    <button class="vm-close" id="vmClose" aria-label="Fechar">✕</button>
+  <!-- ============ LIGHTBOX ============ -->
+  <div id="lb" onclick="if(event.target===this)closeLb()">
+    <span class="close" onclick="closeLb()">&times;</span>
+    <span class="nav prev" onclick="navLb(-1)">&#8249;</span>
+    <span class="nav next" onclick="navLb(1)">&#8250;</span>
+    <div id="lbContent"></div>
+    <div class="count" id="lbCount"></div>
   </div>
 
-  <div class="vm-sub">
-    <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
-      <path d="M12 20V5M5.5 11.5L12 5l6.5 6.5" stroke="#4CAF50" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span>Motivos que aumentam a conformidade do anúncio</span>
-  </div>
-
-  <div class="vm-row">
-    <svg class="vm-check" width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="9.5" stroke="#4CAF50" stroke-width="1.7"/>
-      <path d="M7.8 12.4l2.9 2.9 5.5-6" stroke="#4CAF50" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="vm-txt">Mídia de comparação enviada há 1 mês</span>
-    <svg class="vm-chev" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M6 9.5l6 6 6-6" stroke="#546E7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-
-  <div class="vm-row">
-    <svg class="vm-check" width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="9.5" stroke="#4CAF50" stroke-width="1.7"/>
-      <path d="M7.8 12.4l2.9 2.9 5.5-6" stroke="#4CAF50" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="vm-txt">Nenhuma foto ou vídeo deletados por serem considerados falsos no último mês</span>
-    <svg class="vm-chev" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M6 9.5l6 6 6-6" stroke="#546E7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-
-  <div class="vm-row">
-    <svg class="vm-check" width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="9.5" stroke="#4CAF50" stroke-width="1.7"/>
-      <path d="M7.8 12.4l2.9 2.9 5.5-6" stroke="#4CAF50" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="vm-txt">Perfil criado há mais de 12 meses</span>
-    <svg class="vm-chev" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M6 9.5l6 6 6-6" stroke="#546E7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-
-  <div class="vm-row">
-    <svg class="vm-check" width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="9.5" stroke="#4CAF50" stroke-width="1.7"/>
-      <path d="M7.8 12.4l2.9 2.9 5.5-6" stroke="#4CAF50" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="vm-txt">Documentação verificada</span>
-    <svg class="vm-chev" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M6 9.5l6 6 6-6" stroke="#546E7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-
-  <div class="vm-row">
-    <svg class="vm-check" width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="9.5" stroke="#4CAF50" stroke-width="1.7"/>
-      <path d="M7.8 12.4l2.9 2.9 5.5-6" stroke="#4CAF50" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="vm-txt">Mídia de comparação verificada</span>
-    <svg class="vm-chev" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M6 9.5l6 6 6-6" stroke="#546E7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-
-  <div class="vm-row">
-    <svg class="vm-check" width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="9.5" stroke="#4CAF50" stroke-width="1.7"/>
-      <path d="M7.8 12.4l2.9 2.9 5.5-6" stroke="#4CAF50" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="vm-txt">Acessa a plataforma com frequência.</span>
-    <svg class="vm-chev" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M6 9.5l6 6 6-6" stroke="#546E7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-</div>
-
-<!-- ============ TELA: VALORES ============ -->
-<div class="prices-modal" id="valoresModal">
-  <div class="pr-head">
-    <button class="pr-back" id="vlBack" aria-label="Voltar">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="#1F2937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <h3>Valores</h3>
-  </div>
-
-  <div class="pr-list">
-    <div class="pr-row"><span class="lb">1 hora</span><span class="vl">R$ 350</span></div>
-    <div class="pr-row"><span class="lb">2 horas</span><span class="vl">R$ 600</span></div>
-    <div class="pr-row"><span class="lb">4 horas</span><span class="vl">R$ 1000</span></div>
-    <div class="pr-row"><span class="lb">Pernoite</span><span class="vl">R$ 1500</span></div>
-    <div class="pr-row off"><span class="lb">15 minutos</span><span class="vl">Não realiza</span></div>
-    <div class="pr-row off"><span class="lb">30 minutos</span><span class="vl">Não realiza</span></div>
-    <div class="pr-row off"><span class="lb">Diária</span><span class="vl">Não realiza</span></div>
-    <div class="pr-row off"><span class="lb">Diária de viagem</span><span class="vl">Não realiza</span></div>
-  </div>
-
-  <div class="pr-pay-label">Formas de pagamento:</div>
-  <div class="pr-pay-row">
-    <div class="pr-pay">
-      <svg width="27" height="27" viewBox="0 0 24 24">
-        <path d="M12 2.5 21.5 12 12 21.5 2.5 12z" fill="#263238"/>
-        <path d="M12 6.2v11.6M6.2 12h11.6" stroke="#fff" stroke-width="1.7"/>
-      </svg>
-      <span>PIX</span>
-    </div>
-    <div class="pr-pay">
-      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#263238" stroke-width="1.7">
-        <rect x="3" y="6" width="18" height="13" rx="2"/>
-        <path d="M3 10.3h18" stroke-width="2.4"/>
-      </svg>
-      <span>CARTÃO</span>
-    </div>
-  </div>
+  <div id="toast"></div>
 </div>
 
 <script>
-  // ---------- Menu drawer ----------
-  const menuBtn = document.getElementById('menuBtn');
-  const drawer = document.getElementById('drawer');
-  menuBtn.addEventListener('click', () => drawer.classList.toggle('open'));
+/* ============ TOAST ============ */
+let toastT;
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>t.classList.remove('show'),2200);
+}
 
-  // ---------- Abas ----------
-  const tabs = document.querySelectorAll('.tab');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const alvo = document.getElementById(tab.dataset.target);
-      if (alvo) alvo.scrollIntoView({behavior:'smooth', block:'start'});
-    });
-  });
-
-  // ---------- Carrega fotos/vídeos da pasta "fotos" ----------
-  // Se o arquivo existir, aparece. Se não, fica o placeholder (cinza).
-  const IMG_EXTS = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'JPG', 'JPEG', 'PNG', 'WEBP', 'GIF'];
-
-  // node: elemento <img> ou <video> já existente no HTML (começa hidden)
-  function loadMedia(node, base) {
-    const isVideo = node.tagName === 'VIDEO';
-    const exts = isVideo ? ['mp4', 'webm', 'MP4', 'WEBM'] : IMG_EXTS;
-    let i = 0;
-    function attempt() {
-      if (i >= exts.length) { node.remove(); return; }
-      const url = `${base}.${exts[i++]}`;
-      if (isVideo) node.onloadeddata = () => { node.hidden = false; node.play().catch(()=>{}); };
-      else node.onload = () => {
-        node.hidden = false;
-        // Foto no slot de vídeo? Remove o símbolo ▶
-        if (node.parentElement) node.parentElement.classList.remove('video');
-      };
-      node.onerror = attempt;
-      node.src = url;
-    }
-    attempt();
-  }
-
-  // Capa (banner), avatar (perfil) e mídia de comparação
-  loadMedia(document.getElementById('coverImg'), 'fotos/banner');
-  loadMedia(document.getElementById('coverVid'), 'fotos/banner');
-  loadMedia(document.getElementById('avatarImg'), 'fotos/perfil');
-  loadMedia(document.getElementById('compareImg'), 'fotos/comparacao');
-
-  // Galeria: tenta vídeo (fotos/foto1.mp4) e, se não houver, foto (fotos/foto1.jpg)
-  document.querySelectorAll('#gallery .photo-ph').forEach(slot => {
-    const n = slot.dataset.slot;
-    const video = document.createElement('video');
-    video.muted = true; video.loop = true; video.playsInline = true;
-    video.autoplay = true; video.hidden = true;
-    video.setAttribute('muted', ''); video.setAttribute('playsinline', '');
-    slot.appendChild(video);
-
-    let vi = 0;
-    const vexts = ['mp4', 'MP4', 'webm', 'WEBM'];
-    function tryVideo() {
-      if (vi >= vexts.length) {
-        // Não achou vídeo → tenta foto
-        video.remove();
-        const img = document.createElement('img');
-        img.hidden = true;
-        slot.appendChild(img);
-        loadMedia(img, `fotos/foto${n}`);
-        return;
-      }
-      video.onloadeddata = () => { video.hidden = false; video.play().catch(()=>{}); };
-      video.onerror = tryVideo;
-      video.src = `fotos/foto${n}.${vexts[vi++]}`;
-    }
-    tryVideo();
-  });
-
-  // ---------- Lightbox: clique na mídia da galeria p/ tela cheia ----------
-  const lb = document.getElementById('lightbox');
-  const lbCount = document.getElementById('lbCount');
-  let lbIdx = 0;
-
-  function lbItems() {
-    return [...document.querySelectorAll('#gallery .photo-ph')].map(slot => {
-      const v = slot.querySelector('video:not([hidden])');
-      const i = slot.querySelector('img:not([hidden])');
-      if (v && v.src) return { type: 'video', src: v.src };
-      if (i && i.src) return { type: 'img', src: i.src };
-      return null;
-    }).filter(Boolean);
-  }
-
-  function lbShow(idx) {
-    const items = lbItems();
-    if (!items.length) return;
-    lbIdx = (idx + items.length) % items.length;
-    lb.querySelectorAll('.lb-media').forEach(el => el.remove());
-    const it = items[lbIdx];
-    let el;
-    if (it.type === 'video') {
-      el = document.createElement('video');
-      el.controls = true; el.autoplay = true; el.loop = true;
-      el.muted = true; el.playsInline = true;
-      el.setAttribute('muted', ''); el.setAttribute('playsinline', '');
-      el.src = it.src;
-    } else {
-      el = document.createElement('img');
-      el.src = it.src;
-    }
-    el.className = 'lb-media';
-    lb.appendChild(el);
-    lbCount.textContent = (lbIdx + 1) + ' / ' + items.length;
-    lb.classList.add('open');
-  }
-
-  function lbClose() {
-    lb.classList.remove('open');
-    lb.querySelectorAll('.lb-media').forEach(el => el.remove());
-  }
-
-  document.querySelectorAll('#gallery .photo-ph').forEach(slot => {
-    slot.addEventListener('click', () => {
-      const m = slot.querySelector('video:not([hidden]), img:not([hidden])');
-      if (!m) return;
-      const idx = lbItems().findIndex(x => x.src === m.src);
-      if (idx >= 0) lbShow(idx);
-    });
-  });
-
-  document.getElementById('lbClose').addEventListener('click', lbClose);
-  document.getElementById('lbPrev').addEventListener('click', () => lbShow(lbIdx - 1));
-  document.getElementById('lbNext').addEventListener('click', () => lbShow(lbIdx + 1));
-  lb.addEventListener('click', e => {
-    if (e.target === lb) lbClose();               // clique no fundo fecha
-    else if (e.target.classList.contains('lb-media') && e.target.tagName === 'IMG') {
-      if (Date.now() - lastSwipe > 500) lbClose(); // toque na foto fecha (se não foi swipe)
+/* ============ ASSINATURA ============ */
+function assinar(){
+  const b=document.getElementById('btnSub');
+  if(b.classList.contains('ok'))return;
+  b.classList.add('ok');
+  b.textContent='Assinatura ativa ✓';
+  toast('Assinatura gratuita ativada 🔓');
+  // destrava todos os posts
+  document.querySelectorAll('.post').forEach(p=>{
+    if(!p.classList.contains('unlocked')){
+      const slot=p.querySelector('.media-box').dataset.slot;
+      renderMedia(p.querySelector('.media-box'),slot);
+      p.classList.add('unlocked');
     }
   });
-  document.addEventListener('keydown', e => {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape') lbClose();
-    else if (e.key === 'ArrowRight') lbShow(lbIdx + 1);
-    else if (e.key === 'ArrowLeft') lbShow(lbIdx - 1);
-  });
-  // Deslizar para navegar (toque)
-  let touchX = 0, lastSwipe = 0;
-  lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
-  lb.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - touchX;
-    if (Math.abs(dx) > 50) { lastSwipe = Date.now(); lbShow(lbIdx + (dx < 0 ? 1 : -1)); }
-  }, { passive: true });
+}
 
-  // ---------- Modal "Documentos verificados" ----------
-  const vm = document.getElementById('verifyModal');
-  document.querySelector('.verified-pill').addEventListener('click', () => vm.classList.add('open'));
-  document.getElementById('vmClose').addEventListener('click', () => vm.classList.remove('open'));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') vm.classList.remove('open');
-  });
-
-  // ---------- Tela "Valores" ----------
-  const valModal = document.getElementById('valoresModal');
-  document.getElementById('valoresCard').addEventListener('click', () => valModal.classList.add('open'));
-  document.getElementById('vlBack').addEventListener('click', () => valModal.classList.remove('open'));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') valModal.classList.remove('open');
-  });
-
-  // ---------- Bolha "Impulsionar agora" (bolinha animada) ----------
-  const boostBtn = document.querySelector('.boost-pill');
-  function boostShow() {
-    boostBtn.classList.add('mostra');
-    setTimeout(() => boostBtn.classList.remove('mostra'), 3000);
+/* ============ DESTRAVAR POST ============ */
+function unlock(postId,slot){
+  const p=document.getElementById(postId);
+  if(p.classList.contains('unlocked'))return;
+  const box=p.querySelector('.media-box');
+  if(renderMedia(box,slot)){
+    p.classList.add('unlocked');
+    toast('Conteúdo liberado 🔓');
+  }else{
+    toast('Mídia não encontrada');
   }
-  setTimeout(boostShow, 1500);
-  setInterval(boostShow, 7000);
-  boostBtn.addEventListener('click', boostShow);
+}
 
-  // ---------- Serviços 17+ ----------
-  // r:true = também tem a pílula "Recebo" (igual no print original)
-  const SERVICOS_17 = [
-    {n:'Sexo virtual'},
-    {n:'Fazer roleplay'},
-    {n:'Penetração com acessórios sexuais', r:true},
-    {n:'Utiliza acessórios eróticos'},
-    {n:'Beijo grego', r:true},
-    {n:'Sexo com voyeurismo/ser voyeur', r:true},
-    {n:'Podolatria', r:true},
-    {n:'Fisting'},
-    {n:'Facefuck', r:true},
-    {n:'Quirofilia'},
-    {n:'Trampling'},
-    {n:'Acompanhante'},
-    {n:'Inversão'},
-    {n:'Viagem'},
-    {n:'Sexo anal com preservativo'},
-    {n:'Massagem tântrica'},
-    {n:'Dupla penetração'},
-    {n:'Tripla penetração'},
-    {n:'Dominação'},
-    {n:'Uso de roupas de fantasia/uniformes'},
-    {n:'Permite filmagem'},
-    {n:'Bondage'},
-    {n:'Sadomasoquismo'},
-    {n:'Squirt'},
-    {n:'Chuva dourada'}
-  ];
-  const list17 = document.getElementById('list17');
-  list17.innerHTML = SERVICOS_17.map(s =>
-    '<div class="svc-item">' +
-      '<div class="svc-top"><span>' + s.n + '</span><span class="chev">⌄</span></div>' +
-      '<div class="svc-pills">' +
-        (s.r ? '<span class="pill pill-recebo">Recebo</span>' : '') +
-        '<span class="pill pill-faco">Faço</span>' +
-      '</div>' +
-    '</div>'
-  ).join('');
-  document.getElementById('btn17').addEventListener('click', function () {
-    const abrir = list17.hidden;
-    list17.hidden = !abrir;
-    this.classList.toggle('aberto', abrir);
-  });
+/* ============ CARREGAR MÍDIA (slots) ============ */
+const IMG_EXT=['jpg','jpeg','png','webp','gif','JPG','JPEG','PNG','WEBP','GIF'];
+const VID_EXT=['mp4','webm','MP4','WEBM'];
 
-  // ---------- Localização dinâmica por IP ----------
-  // 1) Detecta a cidade/estado pelo IP (se houver VPN, usa o estado da VPN).
-  // 2) Busca uma cidade VIZINHA (real, via OpenStreetMap) e mostra como
-  //    se fosse a localização da Vitória — "ela é daqui do lado".
-  const UF_NAMES = {
-    AC:'Acre', AL:'Alagoas', AP:'Amapá', AM:'Amazonas', BA:'Bahia', CE:'Ceará',
-    DF:'Distrito Federal', ES:'Espírito Santo', GO:'Goiás', MA:'Maranhão',
-    MT:'Mato Grosso', MS:'Mato Grosso do Sul', MG:'Minas Gerais', PA:'Pará',
-    PB:'Paraíba', PR:'Paraná', PE:'Pernambuco', PI:'Piauí', RJ:'Rio de Janeiro',
-    RN:'Rio Grande do Norte', RS:'Rio Grande do Sul', RO:'Rondônia', RR:'Roraima',
-    SC:'Santa Catarina', SP:'São Paulo', SE:'Sergipe', TO:'Tocantins'
-  };
-
-  function applyLocation(vizinha, uf, detectada) {
-    if (!vizinha) return;
-    uf = (uf || '').toUpperCase();
-    const cityUf = vizinha + (uf ? ' - ' + uf : '');
-    const stateName = UF_NAMES[uf] ? UF_NAMES[uf] : (uf || '');
-
-    const locCity = document.getElementById('locCity');
-    const locState = document.getElementById('locState');
-    locCity.textContent = vizinha;
-    locCity.classList.remove('loc-loading');
-    locState.textContent = stateName ? stateName + (uf ? ' - ' + uf : '') : 'Brasil';
-
-    // Rodapé: mostra o ESTADO (não a cidade) como "de onde ela é"
-    document.getElementById('crumbState').textContent =
-      'Acompanhantes em ' + (stateName || 'Brasil');
-    document.getElementById('crumbCity').textContent =
-      'Mulheres em ' + (stateName || 'Brasil');
+function testImg(url){
+  return new Promise(res=>{const i=new Image();i.onload=()=>res(url);i.onerror=()=>res(null);i.src=url;});
+}
+async function findMedia(slot){
+  for(const e of IMG_EXT){
+    const u=await testImg('fotos/'+slot+'.'+e);
+    if(u)return{type:'img',url:u};
   }
-
-  const toRad = x => x * Math.PI / 180;
-  function haversine(la1, lo1, la2, lo2) {
-    const R = 6371;
-    const dLa = toRad(la2 - la1), dLo = toRad(lo2 - lo1);
-    const a = Math.sin(dLa / 2) ** 2 +
-      Math.cos(toRad(la1)) * Math.cos(toRad(la2)) * Math.sin(dLo / 2) ** 2;
-    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  for(const e of VID_EXT){
+    const u=await testImg('fotos/'+slot+'.'+e);
+    if(u)return{type:'video',url:u};
   }
-
-  const norm = s => (s || '').toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
-
-  // Busca cidades/tvilas reais num raio de ~30km e devolve a mais próxima
-  // diferente da cidade detectada (ou seja, uma VIZINHA).
-  async function findNeighborCity(lat, lon, detectedCity) {
-    const q = `[out:json][timeout:15];
-      (
-        node(around:30000,${lat},${lon})["place"~"city|town|village"]["name"];
-        way(around:30000,${lat},${lon})["place"~"city|town"]["name"];
-      );
-      out tags center 30;`;
-    const resp = await fetch('https://overpass-api.de/api/interpreter', {
-      method: 'POST',
-      body: 'data=' + encodeURIComponent(q)
-    });
-    const data = await resp.json();
-    const detectada = norm(detectedCity);
-    const cidades = (data.elements || [])
-      .filter(e => e.tags && e.tags.name)
-      .map(e => ({
-        nome: e.tags.name,
-        km: haversine(lat, lon,
-          e.lat ?? e.center?.lat,
-          e.lon ?? e.center?.lon)
-      }))
-      .filter(c => norm(c.nome) !== detectada && c.km >= 1 && c.km <= 30)
-      .sort((a, b) => a.km - b.km);
-    return cidades.length ? cidades[0].nome : null;
-  }
-
-  async function detectLocation() {
-    // Passo 1: achar onde o IP está
-    let geo = null;
-    try {
-      const r = await fetch('https://ipwho.is/');
-      const d = await r.json();
-      if (d && d.success && d.city) {
-        geo = { city: d.city, uf: d.region_code || d.region, lat: d.latitude, lon: d.longitude };
-      }
-    } catch (e) { /* tenta a próxima */ }
-
-    if (!geo) {
-      try {
-        const r = await fetch('https://ipapi.co/json/');
-        const d = await r.json();
-        if (d && d.city) {
-          geo = { city: d.city, uf: d.region, lat: d.latitude, lon: d.longitude };
-        }
-      } catch (e) { /* última opção */ }
+  return null;
+}
+function renderMedia(box,slot){
+  // síncrono-ish: dispara carregamento; retorna true (otimista)
+  findMedia(slot).then(m=>{
+    if(!m){box.innerHTML='';return;}
+    if(m.type==='img'){
+      const img=document.createElement('img');
+      img.src=m.url;img.alt='';
+      img.onclick=e=>{e.stopPropagation();openLb(m.url,'img');};
+      box.innerHTML='';box.appendChild(img);
+    }else{
+      const v=document.createElement('video');
+      v.src=m.url;v.muted=true;v.loop=true;v.autoplay=true;v.playsInline=true;
+      box.innerHTML='';box.appendChild(v);
     }
+  });
+  return true;
+}
 
-    if (!geo || geo.lat == null) {
-      applyLocation('São Paulo', 'SP');
-      return;
-    }
+/* ============ LIGHTBOX ============ */
+let lbItems=[],lbIdx=0;
+function collectItems(){
+  lbItems=[];
+  document.querySelectorAll('.media-box img').forEach(im=>lbItems.push({type:'img',url:im.src}));
+}
+function openLb(url,type,idx){
+  collectItems();
+  lbIdx=Math.max(0,lbItems.findIndex(i=>i.url===url));
+  showLb();
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function showLb(){
+  const it=lbItems[lbIdx];
+  const c=document.getElementById('lbContent');
+  if(!it){c.innerHTML='';return;}
+  c.innerHTML=it.type==='img'
+    ?'<img src="'+it.url+'" alt="">'
+    :'<video src="'+it.url+'" controls autoplay playsinline style="max-width:100%;max-height:100%"></video>';
+  document.getElementById('lbCount').textContent=(lbIdx+1)+' / '+lbItems.length;
+}
+function navLb(d){
+  if(!lbItems.length)return;
+  lbIdx=(lbIdx+d+lbItems.length)%lbItems.length;
+  showLb();
+}
+function closeLb(){
+  document.getElementById('lb').classList.remove('open');
+  document.getElementById('lbContent').innerHTML='';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lb').classList.contains('open'))return;
+  if(e.key==='Escape')closeLb();
+  if(e.key==='ArrowLeft')navLb(-1);
+  if(e.key==='ArrowRight')navLb(1);
+});
+// swipe
+let sx=null;
+document.getElementById('lb').addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+document.getElementById('lb').addEventListener('touchend',e=>{
+  if(sx===null)return;
+  const dx=e.changedTouches[0].clientX-sx;
+  if(Math.abs(dx)>50)navLb(dx<0?1:-1);
+  sx=null;
+},{passive:true});
 
-    // Passo 2: achar uma cidade VIZINHA da detectada
-    try {
-      const vizinha = await findNeighborCity(geo.lat, geo.lon, geo.city);
-      if (vizinha) {
-        applyLocation(vizinha, geo.uf, geo.city);
-        return;
-      }
-    } catch (e) { /* cai no fallback */ }
+/* ============ CURTIR ============ */
+function curtir(el){
+  el.classList.toggle('on');
+  toast(el.classList.contains('on')?'Curtido ❤️':'Curtida removida');
+}
 
-    // Fallback: mostra a própria cidade detectada
-    applyLocation(geo.city, geo.uf, geo.city);
+/* ============ CARREGAR FOTOS DO PERFIL ============ */
+(async function(){
+  // capa
+  for(const e of IMG_EXT){
+    const u=await testImg('fotos/banner.'+e);
+    if(u){document.getElementById('imgBanner').src=u;break;}
   }
-
-  detectLocation();
+  // avatar
+  for(const e of IMG_EXT){
+    const u=await testImg('fotos/perfil.'+e);
+    if(u){
+      document.getElementById('imgAvatar').src=u;
+      document.querySelectorAll('.pa-img').forEach(a=>a.src=u);
+      break;
+    }
+  }
+})();
 </script>
-
 </body>
 </html>
