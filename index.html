@@ -162,6 +162,19 @@ body{
 #lb .count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:#fff;font-size:14px;font-weight:600;background:rgba(0,0,0,.5);padding:5px 14px;border-radius:14px}
 
 .end-note{text-align:center;color:var(--muted);font-size:13px;padding:10px 0 2px}
+
+/* ============ PAGAMENTO ============ */
+#payModal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:150;display:none;align-items:flex-end;justify-content:center}
+#payModal.open{display:flex}
+.pay-card{width:100%;max-width:412px;background:#fff;border-radius:22px 22px 0 0;padding:26px 20px 30px;position:relative;animation:payUp .25s ease}
+@keyframes payUp{from{transform:translateY(60%);opacity:.4}to{transform:none;opacity:1}}
+.pay-x{position:absolute;top:14px;right:16px;font-size:28px;color:var(--muted);cursor:pointer;line-height:1}
+.pay-title{font-size:18px;font-weight:700}
+.pay-sub{font-size:14px;color:var(--muted);font-weight:500;margin:4px 0 16px}
+#payEmail{width:100%;height:50px;border:1.5px solid var(--line);border-radius:14px;padding:0 16px;font-family:inherit;font-size:15px;outline:none;background:#FAF7F2;color:var(--ink)}
+#payEmail:focus{border-color:var(--orange)}
+.pay-card .btn-grad{margin-top:14px}
+.pay-note{text-align:center;color:var(--muted);font-size:12.5px;margin-top:12px}
 </style>
 </head>
 <body>
@@ -213,7 +226,7 @@ body{
             Aproveite antes que acabe
           </div>
           <div class="offer-save">Economize 60%</div>
-          <button class="btn-grad" id="btnBig" onclick="assinar()">Assinar agora R$ 19,96</button>
+          <button class="btn-grad" id="btnBig" onclick="openPay('big')">Assinar agora R$ 19,96</button>
           <div class="offer-orig">Preço original <s>R$ 49,90</s></div>
         </div>
 
@@ -222,8 +235,8 @@ body{
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 15l6-6 6 6"/></svg>
         </div>
         <div id="subList">
-          <button class="btn-grad plan" onclick="assinar()"><span>3 meses (50% off )</span><span>R$ 74,85</span></button>
-          <button class="btn-grad plan" onclick="assinar()"><span>6 meses (50% off )</span><span>R$ 149,70</span></button>
+          <button class="btn-grad plan" onclick="openPay('m3')"><span>3 meses (50% off )</span><span>R$ 74,85</span></button>
+          <button class="btn-grad plan" onclick="openPay('m6')"><span>6 meses (50% off )</span><span>R$ 149,70</span></button>
         </div>
       </div>
     </section>
@@ -441,6 +454,18 @@ body{
     <div class="count" id="lbCount"></div>
   </div>
 
+  <!-- ============ PAGAMENTO ============ -->
+  <div id="payModal" onclick="if(event.target===this)closePay()">
+    <div class="pay-card">
+      <span class="pay-x" onclick="closePay()">&times;</span>
+      <div class="pay-title">Finalizar assinatura</div>
+      <div class="pay-sub" id="payPlan"></div>
+      <input type="email" id="payEmail" placeholder="Seu melhor email" autocomplete="email" onkeydown="if(event.key==='Enter')payNow()">
+      <button class="btn-grad" onclick="payNow()">Gerar chave pix</button>
+      <div class="pay-note">Pagamento seguro via Pix 🔒</div>
+    </div>
+  </div>
+
   <div id="toast"></div>
 </div>
 
@@ -454,15 +479,27 @@ function toast(msg){
   toastT=setTimeout(()=>t.classList.remove('show'),2200);
 }
 
-/* ============ ASSINATURA ============ */
-function assinar(){
-  if(document.body.classList.contains('subbed'))return;
-  document.body.classList.add('subbed');
-  const big=document.getElementById('btnBig');
-  big.classList.add('ok');
-  big.textContent='Assinatura ativa ✓';
-  document.querySelectorAll('.plan').forEach(p=>p.classList.add('ok'));
-  toast('Assinatura ativada 🔓');
+/* ============ PAGAMENTO ============ */
+const PLANS={
+  big:{label:'Assinar agora R$ 19,96', link:'https://app.pushinpay.com.br/service/pay/A08AAFDC-1B3E-4575-AEC6-BC4B1278255A'},
+  m3:{label:'3 meses (50% off ) — R$ 74,85', link:'https://app.pushinpay.com.br/service/pay/A08AAFDC-1B3E-4575-AEC6-BC4B1278255A'},
+  m6:{label:'6 meses (50% off ) — R$ 149,70', link:'https://app.pushinpay.com.br/service/pay/A058574B-547A-48AA-87E8-8F2E729ACFFA'}
+};
+function openPay(k){
+  document.getElementById('payPlan').textContent=PLANS[k].label;
+  document.getElementById('payModal').dataset.link=PLANS[k].link;
+  document.getElementById('payEmail').value='';
+  document.getElementById('payModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closePay(){
+  document.getElementById('payModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function payNow(){
+  const v=document.getElementById('payEmail').value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){toast('Digite um email válido');return;}
+  window.location.href=document.getElementById('payModal').dataset.link;
 }
 
 /* ============ POST TRANCADO ============ */
