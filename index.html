@@ -60,8 +60,8 @@ body{
 }
 .avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .p-stats{
-  display:flex;gap:14px;align-items:center;justify-content:space-between;
-  max-width:272px;margin-top:12px;
+  position:absolute;left:118px;right:14px;top:22px;
+  display:flex;justify-content:space-between;align-items:center;
   color:var(--muted);font-size:13.5px;font-weight:500;
 }
 .p-stats span{display:flex;align-items:center;gap:5px}
@@ -183,24 +183,24 @@ body{
     <section class="card">
       <div class="cover"><img id="imgBanner" alt="capa"></div>
       <div class="p-info">
-        <div class="avatar"><img id="imgAvatar" alt="avatar"></div>
-        <div class="p-name">
-          Vitória Dias
-          <svg class="verif" width="17" height="17" viewBox="0 0 24 24"><path fill="#3D9DF6" d="M12 1.8l2.5 2 3.2-.4 1 3 2.9 1.5-1 3 1 3-2.9 1.5-1 3-3.2-.4-2.5 2-2.5-2-3.2.4-1-3L2.4 15.4l1-3-1-3 2.9-1.5 1-3 3.2.4z"/><path fill="#fff" d="M10.6 15.4l-2.9-2.9 1.3-1.3 1.6 1.6 4-4 1.3 1.3z"/></svg>
-        </div>
-        <div class="p-handle">@VitoriaDias</div>
         <div class="p-stats">
           <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>299</span>
           <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="14" height="12" rx="2.5"/><path d="M16.5 10.5l5-3v9l-5-3"/></svg>328</span>
           <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>351</span>
           <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg>52.2K</span>
         </div>
+        <div class="avatar"><img id="imgAvatar" alt="avatar"></div>
+        <div class="p-name">
+          Vitória Dias
+          <svg class="verif" width="17" height="17" viewBox="0 0 24 24"><path fill="#3D9DF6" d="M12 1.8l2.5 2 3.2-.4 1 3 2.9 1.5-1 3 1 3-2.9 1.5-1 3-3.2-.4-2.5 2-2.5-2-3.2.4-1-3L2.4 15.4l1-3-1-3 2.9-1.5 1-3 3.2.4z"/><path fill="#fff" d="M10.6 15.4l-2.9-2.9 1.3-1.3 1.6 1.6 4-4 1.3 1.3z"/></svg>
+        </div>
+        <div class="p-handle">@VitoriaDias</div>
         <div class="p-bio" id="bio">
           <span class="part">Talvez você já me conheça de algum lugar… 25 anos, morena, japinha, e recém… </span><span class="full">Talvez você já me conheça de algum lugar… 25 anos, morena, japinha, e recém turbinada! +2 mil mídias por aqui… vem me conhecer melhor... 💋</span><span class="more" onclick="document.getElementById('bio').classList.toggle('open');this.textContent=document.getElementById('bio').classList.contains('open')?'Mostrar menos':'Ler mais'">Ler mais</span>
         </div>
         <div class="p-loc">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          São Paulo – BRA
+          <span id="locCity">São Paulo</span> – BRA
         </div>
 
         <div class="offer">
@@ -256,7 +256,7 @@ body{
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
         </span>
       </div>
-      <div class="locked" onclick="unlock('post1','foto1')">
+      <div class="locked" onclick="lockedTap()">
         <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
         <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
         <div class="lstats">
@@ -287,7 +287,7 @@ body{
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
         </span>
       </div>
-      <div class="locked" onclick="unlock('post2','foto2')">
+      <div class="locked" onclick="lockedTap()">
         <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
         <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
         <div class="lstats">
@@ -318,7 +318,7 @@ body{
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
         </span>
       </div>
-      <div class="locked" onclick="unlock('post3','foto3')">
+      <div class="locked" onclick="lockedTap()">
         <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
         <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
         <div class="lstats">
@@ -349,7 +349,7 @@ body{
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
         </span>
       </div>
-      <div class="locked" onclick="unlock('post4','foto4')">
+      <div class="locked" onclick="lockedTap()">
         <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
         <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
         <div class="lstats">
@@ -380,7 +380,7 @@ body{
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
         </span>
       </div>
-      <div class="locked" onclick="unlock('post5','foto5')">
+      <div class="locked" onclick="lockedTap()">
         <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
         <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
         <div class="lstats">
@@ -411,7 +411,7 @@ body{
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
         </span>
       </div>
-      <div class="locked" onclick="unlock('post6','foto6')">
+      <div class="locked" onclick="lockedTap()">
         <svg class="wm" viewBox="0 0 560 620" fill="none" stroke="#FBF7F1" stroke-width="15"><path d="M80 40h400a60 60 0 0 1 60 60v300a60 60 0 0 1-60 60H300L140 600l30-140H80a60 60 0 0 1-60-60V100a60 60 0 0 1 60-60z"/></svg>
         <svg class="pad" width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#7C8DA8" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3" fill="#7C8DA8" stroke="none"/></svg>
         <div class="lstats">
@@ -463,14 +463,13 @@ function assinar(){
   big.textContent='Assinatura ativa ✓';
   document.querySelectorAll('.plan').forEach(p=>p.classList.add('ok'));
   toast('Assinatura ativada 🔓');
-  // destrava todos os posts
-  document.querySelectorAll('.post').forEach(p=>{
-    if(!p.classList.contains('unlocked')){
-      const slot=p.querySelector('.media-box').dataset.slot;
-      renderMedia(p.querySelector('.media-box'),slot);
-      p.classList.add('unlocked');
-    }
-  });
+}
+
+/* ============ POST TRANCADO ============ */
+function lockedTap(){
+  toast(document.body.classList.contains('subbed')
+    ? 'Conteúdo sendo preparado ✨'
+    : 'Assine para desbloquear 🔒');
 }
 
 /* ============ ABRIR/FECHAR PLANOS ============ */
@@ -480,53 +479,11 @@ function toggleSub(){
   l.style.display=closed?'none':'';
 }
 
-/* ============ DESTRAVAR POST ============ */
-function unlock(postId,slot){
-  const p=document.getElementById(postId);
-  if(p.classList.contains('unlocked'))return;
-  const box=p.querySelector('.media-box');
-  if(renderMedia(box,slot)){
-    p.classList.add('unlocked');
-    toast('Conteúdo liberado 🔓');
-  }else{
-    toast('Mídia não encontrada');
-  }
-}
-
-/* ============ CARREGAR MÍDIA (slots) ============ */
+/* ============ TESTAR IMAGEM ============ */
 const IMG_EXT=['jpg','jpeg','png','webp','gif','JPG','JPEG','PNG','WEBP','GIF'];
-const VID_EXT=['mp4','webm','MP4','WEBM'];
 
 function testImg(url){
   return new Promise(res=>{const i=new Image();i.onload=()=>res(url);i.onerror=()=>res(null);i.src=url;});
-}
-async function findMedia(slot){
-  for(const e of IMG_EXT){
-    const u=await testImg('fotos/'+slot+'.'+e);
-    if(u)return{type:'img',url:u};
-  }
-  for(const e of VID_EXT){
-    const u=await testImg('fotos/'+slot+'.'+e);
-    if(u)return{type:'video',url:u};
-  }
-  return null;
-}
-function renderMedia(box,slot){
-  // síncrono-ish: dispara carregamento; retorna true (otimista)
-  findMedia(slot).then(m=>{
-    if(!m){box.innerHTML='';return;}
-    if(m.type==='img'){
-      const img=document.createElement('img');
-      img.src=m.url;img.alt='';
-      img.onclick=e=>{e.stopPropagation();openLb(m.url,'img');};
-      box.innerHTML='';box.appendChild(img);
-    }else{
-      const v=document.createElement('video');
-      v.src=m.url;v.muted=true;v.loop=true;v.autoplay=true;v.playsInline=true;
-      box.innerHTML='';box.appendChild(v);
-    }
-  });
-  return true;
 }
 
 /* ============ LIGHTBOX ============ */
@@ -601,6 +558,84 @@ function curtir(el){
     }
   }
 })();
+
+/* ============ LOCALIZAÇÃO POR IP (cidade vizinha) ============ */
+const toRad = x => x * Math.PI / 180;
+function haversine(la1, lo1, la2, lo2) {
+  const R = 6371;
+  const dLa = toRad(la2 - la1), dLo = toRad(lo2 - lo1);
+  const a = Math.sin(dLa / 2) ** 2 +
+    Math.cos(toRad(la1)) * Math.cos(toRad(la2)) * Math.sin(dLo / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+const norm = s => (s || '').toLowerCase()
+  .normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+// Busca cidades/tvilas reais num raio de ~30km e devolve a mais próxima
+// diferente da cidade detectada (ou seja, uma VIZINHA).
+async function findNeighborCity(lat, lon, detectedCity) {
+  const q = `[out:json][timeout:15];
+    (
+      node(around:30000,${lat},${lon})["place"~"city|town|village"]["name"];
+      way(around:30000,${lat},${lon})["place"~"city|town"]["name"];
+    );
+    out tags center 30;`;
+  const resp = await fetch('https://overpass-api.de/api/interpreter', {
+    method: 'POST',
+    body: 'data=' + encodeURIComponent(q)
+  });
+  const data = await resp.json();
+  const detectada = norm(detectedCity);
+  const cidades = (data.elements || [])
+    .filter(e => e.tags && e.tags.name)
+    .map(e => ({
+      nome: e.tags.name,
+      km: haversine(lat, lon,
+        e.lat ?? e.center?.lat,
+        e.lon ?? e.center?.lon)
+    }))
+    .filter(c => norm(c.nome) !== detectada && c.km >= 1 && c.km <= 30)
+    .sort((a, b) => a.km - b.km);
+  return cidades.length ? cidades[0].nome : null;
+}
+
+async function detectLocation() {
+  // Passo 1: achar onde o IP está
+  let geo = null;
+  try {
+    const r = await fetch('https://ipwho.is/');
+    const d = await r.json();
+    if (d && d.success && d.city) {
+      geo = { city: d.city, lat: d.latitude, lon: d.longitude };
+    }
+  } catch (e) { /* tenta a próxima */ }
+
+  if (!geo) {
+    try {
+      const r = await fetch('https://ipapi.co/json/');
+      const d = await r.json();
+      if (d && d.city) {
+        geo = { city: d.city, lat: d.latitude, lon: d.longitude };
+      }
+    } catch (e) { /* última opção */ }
+  }
+
+  if (!geo || geo.lat == null) return; // mantém São Paulo
+
+  // Passo 2: achar uma cidade VIZINHA da detectada
+  try {
+    const vizinha = await findNeighborCity(geo.lat, geo.lon, geo.city);
+    if (vizinha) {
+      document.getElementById('locCity').textContent = vizinha;
+      return;
+    }
+  } catch (e) { /* cai no fallback */ }
+
+  // Fallback: mostra a própria cidade detectada
+  document.getElementById('locCity').textContent = geo.city;
+}
+
+detectLocation();
 </script>
 </body>
 </html>
