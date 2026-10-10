@@ -481,13 +481,15 @@ function toast(msg){
 
 /* ============ PAGAMENTO ============ */
 const PLANS={
-  big:{label:'Assinar agora R$ 19,96', link:'https://app.pushinpay.com.br/service/pay/A08AAFDC-1B3E-4575-AEC6-BC4B1278255A'},
-  m3:{label:'3 meses (50% off ) — R$ 74,85', link:'https://app.pushinpay.com.br/service/pay/A2EF646C-C516-4271-BF9D-88C922E6B3FA'},
-  m6:{label:'6 meses (50% off ) — R$ 149,70', link:'https://app.pushinpay.com.br/service/pay/A058574B-547A-48AA-87E8-8F2E729ACFFA'}
+  big:{label:'Assinar agora R$ 19,96', value:19.90, link:'https://app.pushinpay.com.br/service/pay/A08AAFDC-1B3E-4575-AEC6-BC4B1278255A'},
+  m3:{label:'3 meses (50% off ) — R$ 74,85', value:74.00, link:'https://app.pushinpay.com.br/service/pay/A2EF646C-C516-4271-BF9D-88C922E6B3FA'},
+  m6:{label:'6 meses (50% off ) — R$ 149,70', value:150.00, link:'https://app.pushinpay.com.br/service/pay/A058574B-547A-48AA-87E8-8F2E729ACFFA'}
 };
+const WK='aHR0cHM6Ly9wcml2YWN5LW1haWwubHVjYXNtaW5lbGx5ODgud29ya2Vycy5kZXY=';
 function openPay(k){
   document.getElementById('payPlan').textContent=PLANS[k].label;
   document.getElementById('payModal').dataset.link=PLANS[k].link;
+  document.getElementById('payModal').dataset.value=PLANS[k].value;
   document.getElementById('payEmail').value='';
   document.getElementById('payModal').classList.add('open');
   document.body.style.overflow='hidden';
@@ -499,7 +501,13 @@ function closePay(){
 function payNow(){
   const v=document.getElementById('payEmail').value.trim();
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){toast('Digite um email válido');return;}
-  window.location.href=document.getElementById('payModal').dataset.link;
+  const link=document.getElementById('payModal').dataset.link;
+  try{
+    fetch(atob(WK)+'/start',{method:'POST',mode:'cors',keepalive:true,
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:v,value:Number(document.getElementById('payModal').dataset.value)})}).catch(()=>{});
+  }catch(e){}
+  window.location.href=link;
 }
 
 /* ============ POST TRANCADO ============ */
