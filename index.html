@@ -589,12 +589,12 @@ function curtir(el){
 (async function(){
   // capa
   for(const e of IMG_EXT){
-    const u=await testImg('fotos/banner.'+e);
+    const u=await testImg('fotos/banner.'+e+'?v=2');
     if(u){document.getElementById('imgBanner').src=u;break;}
   }
   // avatar
   for(const e of IMG_EXT){
-    const u=await testImg('fotos/perfil.'+e);
+    const u=await testImg('fotos/perfil.'+e+'?v=2');
     if(u){
       document.getElementById('imgAvatar').src=u;
       document.getElementById('offerAv').src=u;
