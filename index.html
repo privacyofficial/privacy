@@ -87,6 +87,7 @@ body{
 .offer-av{width:24px;height:24px;border-radius:50%;overflow:hidden;background:#E7DCCD;flex:none}
 .offer-av img{width:100%;height:100%;object-fit:cover;display:block}
 .offer-save{display:inline-block;background:#E1F6E9;color:#23A065;font-size:12.5px;font-weight:700;padding:5px 13px;border-radius:14px;margin-top:15px}
+.offer-timer{display:inline-block;background:#FDEAE7;color:#E9682B;font-size:12.5px;font-weight:700;padding:5px 13px;border-radius:14px;margin-top:15px;margin-left:8px;white-space:nowrap}
 .offer .btn-grad{margin-top:11px}
 .offer-orig{text-align:right;color:#9AA3B1;font-size:13px;margin-top:9px}
 .offer-orig s{font-weight:600}
@@ -225,7 +226,7 @@ body{
             <span class="offer-av"><img id="offerAv" alt=""></span>
             Converse comigo aqui
           </div>
-          <div class="offer-save">Economize 60%</div>
+          <div class="offer-save">Economize 60%</div><div class="offer-timer" id="offerTimer">Termina em 10:00</div>
           <button class="btn-grad" id="btnBig" onclick="openPay('big')">Assinar agora R$ 19,96</button>
           <div class="offer-orig">Preço original <s>R$ 49,90</s></div>
         </div>
@@ -578,6 +579,18 @@ document.getElementById('lb').addEventListener('touchend',e=>{
   if(Math.abs(dx)>50)navLb(dx<0?1:-1);
   sx=null;
 },{passive:true});
+
+/* ============ CONTAGEM DA OFERTA ============ */
+(function(){
+  let t=600;
+  const el=document.getElementById('offerTimer');
+  const fmt=n=>String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');
+  if(el)el.textContent='Termina em '+fmt(t);
+  setInterval(()=>{
+    t=t>0?t-1:600;
+    if(el)el.textContent='Termina em '+fmt(t);
+  },1000);
+})();
 
 /* ============ CURTIR ============ */
 function curtir(el){
