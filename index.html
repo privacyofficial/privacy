@@ -176,6 +176,8 @@ body{
 #payEmail:focus{border-color:var(--orange)}
 .pay-card .btn-grad{margin-top:14px}
 .pay-note{text-align:center;color:var(--muted);font-size:12.5px;margin-top:12px}
+.pay-warn{background:#fff4e8;border:1.5px solid #ffd9ad;border-radius:12px;padding:11px 12px;font-size:13px;color:#8a4b00;line-height:1.45;margin:-6px 0 14px;text-align:center}
+.pay-warn b{color:#e0620d}
 </style>
 </head>
 <body>
@@ -461,6 +463,7 @@ body{
       <span class="pay-x" onclick="closePay()">&times;</span>
       <div class="pay-title">Finalizar assinatura</div>
       <div class="pay-sub" id="payPlan"></div>
+      <div class="pay-warn">📧 <b>Todo o conteúdo chega no email que você digitar aqui</b> — links e fotos vão direto pra ele. Confira também a caixa de <b>Spam / Lixo eletrônico</b>.</div>
       <input type="email" id="payEmail" placeholder="Seu melhor email" autocomplete="email" onkeydown="if(event.key==='Enter')payNow()">
       <button class="btn-grad" onclick="payNow()">Gerar chave pix</button>
       <div class="pay-note">Pagamento seguro via Pix 🔒 · Seu acesso chega no seu email</div>
